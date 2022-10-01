@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">@android:color/darker_gray</color>
+    <color name="colorPrimaryDark">#FFE68B</color> // 상태바 색상
+    <color name="colorAccent">@android:color/darker_gray</color>
+    <color name="btnColor">#fff2c5</color>
+    <color name="btnColor2">#ffffff</color>
+    <color name="colorGray">#333333</color>
+    <color name="black">#000000</color>
+    <color name="white">#FFFFFF</color>
+
+
+    <color name="colorWhite">#000000</color> // 로그인화면 텍스트 클릭시
+    <color name="colorBlue">#e8e8e8</color>
+
+    <drawable name="bg_select">#e8e8e8</drawable> // 버튼 눌렀을때
+    <drawable name="bg">#9DECF6</drawable>
+
+    <drawable name="bg_select3">@drawable/logout_btn</drawable> // 회원수정 버튼 눌렀을때 색상변경
+    <drawable name="bg3">@drawable/btn</drawable>
+
+    <drawable name="bg_select4">@drawable/logout_btn2</drawable> // 로그아웃 버튼 눌렀을때 색상변경
+    <drawable name="bg4">@drawable/logout_btn</drawable>
+
+    <drawable name="bg_select5">@drawable/revice_btn2</drawable> // 수정버튼 눌렀을때 색상변경
+    <drawable name="bg5">@drawable/revice_btn</drawable>
+
+    //6 7 9 10
+    <drawable name="bg_select6">@drawable/push_btn</drawable> // 비밀번호변경, 로그인 btn, 회원가입, 검색 btn
+    <drawable name="bg6">@drawable/btn</drawable>
+
+    <drawable name="bg_select8">@drawable/signup_watch_btn2</drawable> // 보기 버튼
+    <drawable name="bg8">@drawable/signup_watch_btn</drawable>
+
+    <drawable name="bg_select11">@drawable/btn_cart2</drawable> // 장바구니
+    <drawable name="bg11">@drawable/btn_cart</drawable>
+
+    <drawable name="bg_select12">@drawable/btn_menu2</drawable> // 메뉴 버튼 눌렀을때
+    <drawable name="bg12">@drawable/btn_menu</drawable>
+
+</resources>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="taxation">
+        <item></item>
+        <item>과세 대상</item>
+        <item>비과세 대상</item>
+    </string-array>
+
+</resources>

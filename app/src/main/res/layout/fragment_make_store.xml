@@ -1,0 +1,347 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+    android:background="#FFFFFF"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:weightSum="2560">
+
+    <LinearLayout
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="300"
+        android:paddingTop="10dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="가게 등록"
+            android:textAlignment="center"
+            android:textColor="#3F51B5"
+            android:textSize="25dp"
+            android:textStyle="bold" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1960"
+        android:background="@drawable/round"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:orientation="vertical"
+        android:weightSum="1960">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="15dp"
+            android:layout_weight="180"
+            android:weightSum="1440">
+
+            <Spinner
+                android:id="@+id/spinner_taxation"
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:layout_weight="300" />
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="180"
+            android:weightSum="1440">
+
+            <EditText
+                android:id="@+id/Input_corporate_registration_number"
+                android:hint="사업자 등록 번호를 입력해 주세요."
+                android:paddingLeft="10dp"
+                android:layout_width="0dp"
+                android:layout_height="35dp"
+                android:layout_weight="1300"
+                android:textSize="15dp"
+                android:inputType="number"
+                android:background="@drawable/edit"
+                android:textCursorDrawable="@drawable/cursor"
+                android:singleLine="true"/>
+        </LinearLayout>
+        <LinearLayout
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="180"
+            android:weightSum="1440">
+
+            <EditText
+                android:id="@+id/Input_business_conditions"
+                android:hint="업태"
+                android:paddingLeft="10dp"
+                android:layout_width="0dp"
+                android:layout_height="35dp"
+                android:layout_weight="1300"
+                android:textSize="15dp"
+                android:background="@drawable/edit"
+                android:textCursorDrawable="@drawable/cursor"
+                android:singleLine="true"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="180"
+            android:weightSum="1440">
+
+            <EditText
+                android:id="@+id/Input_event"
+                android:hint="종목"
+                android:paddingLeft="10dp"
+                android:layout_width="0dp"
+                android:layout_height="35dp"
+                android:layout_weight="1300"
+                android:textSize="15dp"
+                android:background="@drawable/edit"
+                android:textCursorDrawable="@drawable/cursor"
+                android:singleLine="true" />
+
+        </LinearLayout>
+        <LinearLayout
+            android:gravity="center_vertical"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginLeft="20dp"
+            android:layout_weight="140">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:text="▶ 업태와 종목은 한글로만 입력해주세요."
+                android:textColor="#FF5722"
+                android:textSize="12sp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="180"
+            android:weightSum="1440">
+
+            <EditText
+                android:id="@+id/Input_business_name"
+                android:layout_width="0dp"
+                android:layout_height="35dp"
+                android:layout_weight="1300"
+                android:background="@drawable/edit"
+                android:hint="상호명을 입력해주세요."
+                android:paddingLeft="10dp"
+                android:singleLine="true"
+                android:textCursorDrawable="@drawable/cursor"
+                android:textSize="15dp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="180"
+            android:weightSum="1440">
+
+            <EditText
+                android:id="@+id/representative"
+                android:hint="대표자명"
+                android:paddingLeft="10dp"
+                android:layout_width="0dp"
+                android:layout_height="35dp"
+                android:layout_weight="1300"
+                android:textSize="15dp"
+                android:maxLength="5"
+                android:background="@drawable/edit"
+                android:textCursorDrawable="@drawable/cursor"
+                android:singleLine="true" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:gravity="center_vertical"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginLeft="20dp"
+            android:layout_weight="140">
+
+            <LinearLayout
+                android:gravity="center_vertical"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="340">
+
+                <TextView
+                    android:text="소재지"
+                    android:textSize="15dp"
+                    android:textStyle="bold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:gravity="center"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="700">
+
+                <EditText
+                    android:id="@+id/store_address"
+                    android:background="@drawable/modify_edit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="35dp"
+                    android:paddingLeft="10dp"
+                    android:textSize="15dp"
+                    android:textCursorDrawable="@drawable/cursor"
+                    android:singleLine="true"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:gravity="center"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="400">
+
+                <Button
+                    android:id="@+id/store_address_btn"
+                    android:background="@drawable/btn_revice"
+                    android:text="주소 찾기"
+                    android:layout_width="60dp"
+                    android:layout_height="35dp" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+        <LinearLayout
+            android:gravity="center_vertical"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginLeft="20dp"
+            android:layout_weight="140">
+
+            <LinearLayout
+                android:gravity="center_vertical"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="340">
+
+                <TextView
+                    android:text="로고 이미지"
+                    android:textSize="15dp"
+                    android:textStyle="bold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:gravity="center"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="700">
+
+                <EditText
+                    android:id="@+id/attached_logo_file"
+                    android:background="@drawable/modify_edit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="35dp"
+                    android:paddingLeft="10dp"
+                    android:textSize="15dp"
+                    android:textCursorDrawable="@drawable/cursor"
+                    android:singleLine="true"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:gravity="center"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="400">
+
+                <Button
+                    android:id="@+id/store_logo_btn"
+                    android:background="@drawable/btn_revice"
+                    android:text="찾아보기"
+                    android:layout_width="60dp"
+                    android:layout_height="35dp" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="300"
+            android:weightSum="1440">
+
+            <EditText
+                android:id="@+id/Input_other_things"
+                android:hint="가게 등록 및 뭉쳐서 시키자에 대한 궁금한 점이나\n상담을 희망하는 부분에 대하여 적어주세요.(선택)"
+                android:paddingLeft="10dp"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1300"
+                android:textSize="15dp"
+                android:inputType="number"
+                android:background="@drawable/edit"
+                android:textCursorDrawable="@drawable/cursor"
+                android:singleLine="true"/>
+        </LinearLayout>
+        <LinearLayout
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="180"
+            android:weightSum="1440">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="35dp"
+                android:layout_weight="1300"
+                android:textAlignment="center"
+                android:textStyle="bold"
+                android:text="가게 등록 완료 후 평균 2~3일 이내\n심사 승인 결과를 전화로 알려드립니다."
+                android:textSize="12dp"
+                android:textColor="#009688"/>
+
+        </LinearLayout>
+
+
+    </LinearLayout> <!-- weightSum 12 끝 -->
+
+    <LinearLayout
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="300"
+        android:weightSum="1440">
+
+        <Button
+            android:text="승인 상담 신청 후 가게 등록 완료하기"
+            android:id="@+id/wait_approval_btn"
+            android:background="@drawable/btn_signup"
+            android:layout_width="0dp"
+            android:layout_height="35dp"
+            android:layout_weight="1300" />
+
+    </LinearLayout>
+
+
+
+</LinearLayout>
