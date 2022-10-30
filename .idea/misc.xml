@@ -3,6 +3,27 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/AndroidProject/Moonkey_store/app/src/main/res/layout/activity_howtoregistration.xml" value="0.4466666666666667" />
+        <entry key="..\:/AndroidProject/Moonkey_store/app/src/main/res/layout/activity_login.xml" value="0.3333333333333333" />
+        <entry key="..\:/AndroidProject/Moonkey_store/app/src/main/res/layout/activity_main.xml" value="0.171225937183384" />
+        <entry key="..\:/AndroidProject/Moonkey_store/app/src/main/res/layout/activity_make_menu.xml" value="0.20208333333333334" />
+        <entry key="..\:/AndroidProject/Moonkey_store/app/src/main/res/layout/activity_mypage.xml" value="0.3333333333333333" />
+        <entry key="..\:/AndroidProject/Moonkey_store/app/src/main/res/layout/activity_personal_information.xml" value="0.171225937183384" />
+        <entry key="..\:/AndroidProject/Moonkey_store/app/src/main/res/layout/activity_searchid.xml" value="0.171225937183384" />
+        <entry key="..\:/AndroidProject/Moonkey_store/app/src/main/res/layout/activity_searchpw.xml" value="0.1953125" />
+        <entry key="..\:/AndroidProject/Moonkey_store/app/src/main/res/layout/activity_singup.xml" value="0.18840579710144928" />
+        <entry key="..\:/AndroidProject/Moonkey_store/app/src/main/res/layout/activity_store_want_rider_type.xml" value="0.171225937183384" />
+        <entry key="..\:/AndroidProject/Moonkey_store/app/src/main/res/layout/activity_user_agreements.xml" value="0.171225937183384" />
+        <entry key="..\:/AndroidProject/Moonkey_store/app/src/main/res/layout/fragment_account_modify.xml" value="0.171225937183384" />
+        <entry key="..\:/AndroidProject/Moonkey_store/app/src/main/res/layout/fragment_history.xml" value="0.171225937183384" />
+        <entry key="..\:/AndroidProject/Moonkey_store/app/src/main/res/layout/fragment_home.xml" value="0.14666666666666667" />
+        <entry key="..\:/AndroidProject/Moonkey_store/app/src/main/res/layout/fragment_license.xml" value="0.4466666666666667" />
+        <entry key="..\:/AndroidProject/Moonkey_store/app/src/main/res/layout/fragment_productinfo.xml" value="0.20208333333333334" />
+        <entry key="..\:/AndroidProject/Moonkey_store/app/src/main/res/layout/fragment_question.xml" value="0.171225937183384" />
+        <entry key="..\:/AndroidProject/Moonkey_store/app/src/main/res/layout/fragment_riderhis.xml" value="0.171225937183384" />
+        <entry key="..\:/AndroidProject/Moonkey_store/app/src/main/res/layout/fragment_setting.xml" value="0.171225937183384" />
+        <entry key="..\:/AndroidProject/Moonkey_store/app/src/main/res/layout/layout_slide_menu.xml" value="0.22" />
+        <entry key="..\:/AndroidProject/Moonkey_store/app/src/main/res/layout/view_menulist.xml" value="0.22327898550724637" />
         <entry key="..\:/AndroidProject/ui21/app/src/main/res/layout/activity_howtostanding.xml" value="0.359375" />
         <entry key="..\:/AndroidProject/ui21/app/src/main/res/layout/activity_login.xml" value="0.20742753623188406" />
         <entry key="..\:/AndroidProject/ui21/app/src/main/res/layout/activity_main.xml" value="0.20742753623188406" />

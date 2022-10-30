@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Ui21">
         <activity
+            android:name=".AddMenuActivity"
+            android:exported="true" />
+        <activity
             android:name=".MainActivity"
             android:exported="true" />
         <activity
@@ -28,9 +31,8 @@
             android:name=".FindAccountActivity"
             android:exported="true" />
         <activity
-        android:name=".FindPwActivity"
-        android:exported="true" />
-
+            android:name=".FindPwActivity"
+            android:exported="true" />
     </application>
 
 </manifest>
