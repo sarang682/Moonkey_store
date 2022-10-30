@@ -5,6 +5,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.WindowManager;
 
+import com.example.ui2_1.R;
+
 public class MainActivity extends AppCompatActivity {
 
     @Override

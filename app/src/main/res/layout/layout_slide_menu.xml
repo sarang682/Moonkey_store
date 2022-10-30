@@ -110,13 +110,13 @@
                         android:layout_width="60dp"
                         android:layout_height="60dp"
                         android:layout_gravity="center"
-                        android:src="@drawable/ic_baseline_folder_shared_24" />
+                        android:src="@drawable/ic_baseline_rate_review_24" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:text="면허 관리" />
+                        android:text="리뷰관리" />
                 </LinearLayout>
 
                 <View
@@ -142,7 +142,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:text="운행 내역" />
+                        android:text="접수 내역" />
                 </LinearLayout>
 
                 <View
@@ -163,14 +163,14 @@
                         android:layout_width="60dp"
                         android:layout_height="60dp"
                         android:layout_gravity="center"
-                        android:src="@drawable/ic_baseline_done_24" />
+                        android:src="@drawable/ic_baseline_home_24" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:textAlignment="center"
-                        android:text="운행 승인 신청" />
+                        android:text="입점 신청" />
 
             </LinearLayout>
 
@@ -251,7 +251,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_weight="1"
-                    android:text="교육센터"
+                    android:text="교육 듣기"
                     android:textColor="#000"
                     android:textSize="16sp" />
 
@@ -262,7 +262,6 @@
                     android:layout_marginBottom="20dp"
                     android:src="@drawable/ic_arrow_right" />
             </LinearLayout>
-
 
             <View
                 android:layout_width="match_parent"

@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:background="#FFFFFF"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#FFFFFF"
     android:weightSum="2560">
 
     <LinearLayout
@@ -18,7 +19,7 @@
             android:id="@+id/mainText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="회원정보수정"
+            android:text="상품 옵션 추가 및 상품 수정"
             android:textAlignment="center"
             android:textSize="10pt"
             android:textColor="#000000"
@@ -37,8 +38,6 @@
             android:background="#BDBDBD"/>
 
     </LinearLayout>
-    <!-- 회원정보 수정 탭 끝-->
-
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="wrap_content"
@@ -66,7 +65,7 @@
             android:layout_marginBottom="5dp">
 
             <TextView
-                android:text="내 정보"
+                android:text="기본 정보"
                 android:textSize="17dp"
                 android:textStyle="bold"
                 android:textColor="#000000"
@@ -100,7 +99,7 @@
                 android:layout_weight="340">
 
                 <TextView
-                    android:text="아이디"
+                    android:text="상품명"
                     android:textSize="15dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
@@ -114,64 +113,15 @@
                 android:layout_weight="700">
 
                 <EditText
-                    android:id="@+id/modify_id"
-                    android:background="@drawable/modify_edit"
+                    android:id="@+id/modify_menu_name"
                     android:layout_width="wrap_content"
                     android:layout_height="35dp"
-                    android:paddingLeft="10dp"
-                    android:textSize="15dp"
-                    android:textCursorDrawable="@drawable/cursor"
-                    android:singleLine="true"/>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:gravity="center"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="400">
-
-
-            </LinearLayout>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="210"
-            android:weightSum="1440">
-
-
-            <LinearLayout
-                android:gravity="center_vertical"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="340">
-
-                <TextView
-                    android:text="닉네임"
-                    android:textSize="15dp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:gravity="center"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="700">
-
-                <EditText
-                    android:id="@+id/modify_nickname"
                     android:background="@drawable/modify_edit"
-                    android:layout_width="wrap_content"
-                    android:layout_height="35dp"
                     android:paddingLeft="10dp"
-                    android:textSize="15dp"
+                    android:singleLine="true"
                     android:textCursorDrawable="@drawable/cursor"
-                    android:singleLine="true"/>
+                    android:textSize="15dp"
+                    tools:ignore="TouchTargetSizeCheck" />
 
             </LinearLayout>
 
@@ -182,7 +132,7 @@
                 android:layout_weight="400">
 
                 <Button
-                    android:id="@+id/modify_name_btn"
+                    android:id="@+id/modify_menu_name_btn"
                     android:background="@drawable/btn_revice"
                     android:text="수정"
                     android:layout_width="60dp"
@@ -206,7 +156,7 @@
                 android:layout_weight="340">
 
                 <TextView
-                    android:text="휴대폰번호"
+                    android:text="가격"
                     android:textSize="15dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
@@ -220,12 +170,66 @@
                 android:layout_weight="700">
 
                 <EditText
-                    android:id="@+id/modify_phoneNum"
+                    android:id="@+id/modify_menu_cost"
+                    android:background="@drawable/modify_edit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="35dp"
+                    android:paddingLeft="10dp"
+                    android:textSize="15dp"
+                    android:textCursorDrawable="@drawable/cursor"
+                    android:singleLine="true"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:gravity="center"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="400">
+
+                <Button
+                    android:id="@+id/modify_menu_cost_btn"
+                    android:background="@drawable/btn_revice"
+                    android:text="수정"
+                    android:layout_width="60dp"
+                    android:layout_height="35dp" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="210"
+            android:weightSum="1440">
+
+
+            <LinearLayout
+                android:gravity="center_vertical"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="340">
+
+                <TextView
+                    android:text="상품사진"
+                    android:textSize="15dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:gravity="center"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="700">
+
+                <EditText
+                    android:id="@+id/modify_menu_picture"
                     android:background="@drawable/modify_edit"
                     android:layout_width="wrap_content"
                     android:paddingLeft="10dp"
                     android:layout_height="35dp"
-                    android:inputType="phone"
                     android:maxLength="11"
                     android:textSize="15dp"
                     android:textCursorDrawable="@drawable/cursor"
@@ -240,9 +244,9 @@
                 android:layout_weight="400">
 
                 <Button
-                    android:id="@+id/modify_phoneNum_btn"
+                    android:id="@+id/attached_file_btn"
                     android:background="@drawable/btn_revice"
-                    android:text="수정"
+                    android:text="찾아보기"
                     android:layout_width="60dp"
                     android:layout_height="35dp" />
 
@@ -253,11 +257,93 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
+            android:layout_weight="210"
+            android:weightSum="1440">
+
+
+            <LinearLayout
+                android:gravity="center_vertical"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="340">
+
+                <TextView
+                    android:text="메뉴 상태"
+                    android:textSize="15dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+            </LinearLayout>
+
+            <Spinner
+                android:id="@+id/spinner_menu_state"
+                android:layout_width="60dp"
+                android:layout_height="35dp"
+                android:layout_weight="300" />
+
+            <LinearLayout
+                android:gravity="center"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="400">
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:layout_weight="210"
+            android:weightSum="1440">
+
+
+            <LinearLayout
+                android:gravity="center_vertical"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="340">
+
+                <TextView
+                    android:text="상품 설명"
+                    android:textSize="15dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:gravity="center"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1050">
+
+                <EditText
+                    android:hint="한 줄로 간략하게 설명해 주세요."
+                    android:id="@+id/modify_menu_explan"
+                    android:background="@drawable/modify_edit"
+                    android:layout_width="wrap_content"
+                    android:paddingLeft="10dp"
+                    android:layout_height="60dp"
+                    android:maxLength="11"
+                    android:textSize="15dp"
+                    android:textCursorDrawable="@drawable/cursor"
+                    android:singleLine="true"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
             android:layout_weight="100">
 
         </LinearLayout>
 
-        <!--비밀번호 변경-->
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
@@ -277,7 +363,7 @@
             android:layout_marginBottom="5dp">
 
             <TextView
-                android:text="비밀번호 변경"
+                android:text="추가 사항"
                 android:textSize="17dp"
                 android:textStyle="bold"
                 android:textColor="#000000"
@@ -299,120 +385,84 @@
 
         </LinearLayout>
 
-        <LinearLayout
-            android:gravity="center"
+        <androidx.appcompat.widget.LinearLayoutCompat
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="210">
+            android:layout_weight="1200">
 
-            <EditText
-                android:id="@+id/modify_currently_pw_edit"
-                android:hint="현재 비밀번호를 입력하세요."
-                android:background="@drawable/edit"
-                android:paddingLeft="10dp"
-                android:textSize="15dp"
-                android:inputType="textPassword"
-                android:textCursorDrawable="@drawable/cursor"
-                android:singleLine="true"
-                android:layout_width="350dp"
-                android:layout_height="35dp"/>
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                >
 
-        </LinearLayout>
+                <EditText
+                    android:id="@+id/newitemname"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
+                    android:hint="추가옵션명"
+                    tools:ignore="TouchTargetSizeCheck,TouchTargetSizeCheck" />
+                <EditText
+                    android:hint="가격"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:id="@+id/newitemcost"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
+                    />
+                <Button
+                    android:text="ADD"
+                    android:layout_width="90dp"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/btnAdd"
+                    android:onClick="mOnClick"
+                    />
 
-        <LinearLayout
-            android:gravity="center"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="210">
+                <Button
+                    android:text="DELETE"
+                    android:layout_width="90dp"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/btnDelete"
+                    android:onClick="mOnClick"
+                    />
+            </LinearLayout>
 
-            <EditText
-                android:id="@+id/modify_new_pw_edit"
-                android:hint="새 비밀번호를 입력하세요."
-                android:background="@drawable/edit"
-                android:paddingLeft="10dp"
-                android:textSize="15dp"
-                android:inputType="textPassword"
-                android:textCursorDrawable="@drawable/cursor"
-                android:singleLine="true"
-                android:layout_width="350dp"
-                android:layout_height="35dp"/>
+            <ListView
+                android:id="@+id/listView"
+                android:layout_width="match_parent"
+                android:layout_height="0dip"
+                android:layout_weight="1" />
 
-        </LinearLayout>
-
-        <LinearLayout
-            android:gravity="center"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="210">
-
-            <EditText
-                android:id="@+id/modify_new_pwConfirm_edit"
-                android:hint="새 비밀번호를 한번 더 입력해주세요."
-                android:background="@drawable/edit"
-                android:paddingLeft="10dp"
-                android:textSize="15dp"
-                android:inputType="textPassword"
-                android:textCursorDrawable="@drawable/cursor"
-                android:singleLine="true"
-                android:layout_width="350dp"
-                android:layout_height="35dp"/>
-
-        </LinearLayout>
+        </androidx.appcompat.widget.LinearLayoutCompat>
 
         <LinearLayout
-            android:gravity="center"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="310">
-
-            <TextView
-                android:text="비밀번호는 8자 이상의 숫자와 \n영문,특수문자의 조합이어야 합니다."
-                android:textColor="#FF5722"
-                android:textAlignment="center"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:gravity="center"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="210">
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
 
             <Button
-                android:id="@+id/modify_pw_btn"
-                android:text="비밀번호 변경"
-                android:background="@drawable/btn_modify_pw"
-                android:layout_width="match_parent"
-                android:layout_height="35dp"
-                android:layout_marginBottom="5dp"/>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="100">
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:gravity="center"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="210">
+                android:id="@+id/delete_menu"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_margin="10dp"
+                android:text="상품 삭제"
+                android:textSize="7pt"
+                android:onClick="onClick" />
 
             <Button
-                android:id="@+id/unregister_btn"
-                android:text="회원탈퇴"
-                android:background="@drawable/btn_modify_pw"
-                android:layout_width="match_parent"
-                android:layout_height="35dp"
-                android:layout_marginBottom="5dp"/>
-
+                android:id="@+id/complete"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_margin="10dp"
+                android:text="수정 완료"
+                android:textSize="7pt"
+                android:onClick="onClick" />
         </LinearLayout>
-
     </LinearLayout>
-
 </LinearLayout>

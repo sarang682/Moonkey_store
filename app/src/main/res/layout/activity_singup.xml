@@ -17,7 +17,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="뭉쳐서 시키자(커넥터) 회원가입\n 뭉키에 가입해 다양한 혜택을 누리세요"
+            android:text="뭉쳐서 시키자 회원가입\n 뭉키에 가입해 다양한 혜택을 누리세요"
             android:textAlignment="center"
             android:textColor="#3F51B5"
             android:textSize="14dp"

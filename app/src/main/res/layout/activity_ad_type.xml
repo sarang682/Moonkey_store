@@ -9,15 +9,15 @@
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-
         <TextView
-            android:layout_width="match_parent"
-            android:layout_height="53dp"
-            android:background="#3F51B5"
+            android:text="광고 정보"
+            android:textSize="20sp"
             android:gravity="center"
-            android:text="회원 탈퇴"
-            android:textColor="#FBFBFB"
-            android:textSize="20sp" />
+            android:textColor="#FFFFFF"
+            android:background="#03A9F4"
+            android:layout_width="match_parent"
+            android:layout_height="53dp" />
+
     </LinearLayout>
 
     <ScrollView
@@ -31,15 +31,14 @@
             android:layout_height="wrap_content">
 
             <TextView
-                android:id="@+id/unreigster_text"
+                android:id="@+id/text_2"
                 android:textSize="15sp"
                 android:textColor="#000"
                 android:alpha="0.87"
                 android:gravity="center"
                 android:layout_marginBottom="3dp"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="회원탈퇴 전 유의사항!"/>
+                android:layout_height="wrap_content" />
 
         </LinearLayout>
     </ScrollView>
@@ -48,24 +47,14 @@
         android:background="#66bdbdbd"
         android:layout_width="match_parent"
         android:layout_height="1dp" />
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
-
-    <CheckBox
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:onClick="checked"
-        android:text="위 유의사항에 대하여 동의하십니까?" />
 
     <LinearLayout
         android:orientation="horizontal"
         android:gravity="center"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-
         <Button
-            android:text="탈퇴하기"
+            android:text="확인"
             android:textSize="15sp"
             android:padding="16dp"
             android:gravity="center"

@@ -18,10 +18,10 @@
             android:id="@+id/mainText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="커넥터 등록방법"
+            android:text="입점 신청방법"
             android:textAlignment="center"
-            android:textColor="#000000"
             android:textSize="10pt"
+            android:textColor="#000000"
             android:textStyle="bold" />
 
     </LinearLayout>
@@ -95,7 +95,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="1. 운전 면허증(도보/자전거 이외 수단 신청 시 면허 필수)\n\t면허를 미리 등록해두시면 더욱 편리합니다.\n2. 정산 받을 계좌의 통장 사본\n3. 작성 완료한 시간제 보험 신청서" />
+                android:text="1. 사업자 등록증\n2. 영업신고증\n3. 정산 받을 계좌의 통장 사본\n4. 메뉴판 사진" />
         </LinearLayout>
 
         <!--2단계-->
@@ -118,7 +118,7 @@
             android:layout_marginBottom="5dp">
 
             <TextView
-                android:text="2단계. 커넥터 신청 정보 입력하기"
+                android:text="2단계. 입점 신청 정보 입력하기"
                 android:textSize="17dp"
                 android:textStyle="bold"
                 android:textColor="#000000"
@@ -148,10 +148,10 @@
             android:orientation="vertical">
 
             <TextView
+                android:text="입점 신청하기 버튼을 눌러 가게/사업자/광고 \n항목을 모두 입력하여 진행해 주세요."
+                android:textAlignment="center"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="커넥터로 등록 하기 버튼을 눌러 면허증 등록/주소방식 등 선택 \n항목을 모두 입력하여 진행해 주세요."
-                android:textAlignment="center" />
+                android:layout_height="wrap_content" />
 
             <TextView
                 android:text="* 정보 입력에 어려움이 있다면, 담당자와 전화 상담을 통하여\n 입점 신청을 진행할 수 있습니다."
@@ -218,7 +218,7 @@
             android:orientation="vertical">
 
             <TextView
-                android:text="신청 완료 후 \n평균 1~2일 이내 심사 승인 결과를 알려드립니다."
+                android:text="입점 신청 완료 후 \n평균 2~3일 이내 심사 승인 결과를 알려드립니다."
                 android:textAlignment="center"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
@@ -239,8 +239,8 @@
 
             <Button
                 android:id="@+id/standing_point_btn"
-                android:text="커넥터 등록 신청하기"
-                android:background="@drawable/btn"
+                android:text="입점 신청하기"
+                android:background="@drawable/btn_modify_pw"
                 android:layout_width="match_parent"
                 android:layout_height="35dp"
                 android:layout_marginBottom="5dp"/>

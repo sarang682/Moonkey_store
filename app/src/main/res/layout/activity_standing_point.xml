@@ -1,0 +1,285 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+    android:background="#FFFFFF"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:weightSum="2560">
+
+    <LinearLayout
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="300"
+        android:paddingTop="10dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="입점 신청하기"
+            android:textAlignment="center"
+            android:textColor="#3F51B5"
+            android:textSize="25dp"
+            android:textStyle="bold" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1960"
+        android:background="@drawable/round"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:orientation="vertical"
+        android:weightSum="1960">
+
+        <LinearLayout
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="15dp"
+            android:layout_weight="180"
+            android:weightSum="1440">
+
+            <TextView
+                android:text="1. 뭉키 입점에 필요한 정보를 채워주세요."
+                android:textSize="17dp"
+                android:textStyle="bold"
+                android:textColor="#000000"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="350"
+            android:weightSum="1440"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="20dp"
+                android:background="#FFF171"
+                android:textStyle="bold"
+                android:textColor="#000000"
+                android:text="📝 맞춤 상담을 위한 설문 작성하기" />
+
+            <EditText
+                android:id="@+id/want_txt"
+                android:layout_margin="10dp"
+                android:hint="작성하시면 필요한 내용을\n더 자세히 안내드릴 수 있습니다."
+                android:background="@drawable/edit"
+                android:paddingLeft="10dp"
+                android:textSize="15dp"
+                android:textAlignment="center"
+                android:inputType="text"
+                android:textCursorDrawable="@drawable/cursor"
+                android:singleLine="true"
+                android:layout_width="350dp"
+                android:layout_height="50dp"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="320"
+            android:weightSum="1440">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#A7F5FF"
+                android:textStyle="bold"
+                android:textColor="#000000"
+                android:text="💰 사업자 정보 등록 \n>> 사업자 등록증, 영업신고증, 통장사본\n(총 3개의 파일을 모두 등록해주세요.)" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:gravity="center_vertical"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginLeft="20dp"
+            android:layout_weight="140">
+
+            <LinearLayout
+                android:gravity="center_vertical"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="340">
+
+                <TextView
+                    android:text="파일 첨부"
+                    android:textSize="15dp"
+                    android:textStyle="bold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:gravity="center"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="700">
+
+                <EditText
+                    android:id="@+id/attached_file"
+                    android:background="@drawable/modify_edit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="35dp"
+                    android:paddingLeft="10dp"
+                    android:textSize="15dp"
+                    android:textCursorDrawable="@drawable/cursor"
+                    android:singleLine="true"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:gravity="center"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="400">
+
+                <Button
+                    android:id="@+id/attached_file_btn"
+                    android:background="@drawable/btn_revice"
+                    android:text="찾아보기"
+                    android:layout_width="60dp"
+                    android:layout_height="35dp" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="15dp"
+            android:layout_weight="180"
+            android:weightSum="1440">
+
+            <TextView
+                android:text="2. 원하는 광고 정보를 입력해주세요."
+                android:textSize="17dp"
+                android:textStyle="bold"
+                android:textColor="#000000"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="140"
+            android:orientation="horizontal"
+            android:weightSum="1440">
+
+            <LinearLayout
+                android:gravity="center_vertical"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1140">
+
+                <TextView
+                    android:text="광고 종류 보기"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"/>
+            </LinearLayout>
+            <LinearLayout
+                android:gravity="center"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="300">
+
+                <Button
+                    android:id="@+id/ad_watch_btn1"
+                    android:text="보기"
+                    android:textSize="10dp"
+                    android:background="@drawable/btn_view"
+                    android:layout_width="50dp"
+                    android:layout_height="25dp" />
+            </LinearLayout>
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="140">
+
+            <CheckBox
+                android:id="@+id/ad_check"
+                android:text="광고 정기 결제에 동의합니다. (선택)"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="13dp"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="200"
+            android:weightSum="1440">
+
+            <EditText
+                android:id="@+id/questionnaire"
+                android:hint="선택하시는 광고 정보를 입력해주세요.\n모두 선택할 수도, 하나만 선택할 수도 있습니다."
+                android:paddingLeft="10dp"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_weight="1300"
+                android:textSize="15dp"
+                android:inputType="phone"
+                android:maxLength="11"
+                android:background="@drawable/edit"
+                android:textCursorDrawable="@drawable/cursor"
+                android:singleLine="true" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="15dp"
+            android:layout_weight="180"
+            android:weightSum="1440">
+
+            <TextView
+                android:text="3. 가게를 만들어 보세요."
+               android:textSize="17dp"
+                android:textStyle="bold"
+                android:textColor="#000000"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+    </LinearLayout> <!-- weightSum 12 끝 -->
+
+    <LinearLayout
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="300"
+        android:weightSum="1440">
+
+        <Button
+            android:text="+ 가게 추가하기"
+            android:id="@+id/make_store_btn"
+            android:background="@drawable/btn_signup"
+            android:layout_width="0dp"
+            android:layout_height="35dp"
+            android:layout_weight="1300" />
+
+    </LinearLayout>
+
+</LinearLayout>
