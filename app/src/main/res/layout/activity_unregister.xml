@@ -55,7 +55,8 @@
     <CheckBox
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:onClick="checked"
+        android:textSize="15sp"
+        android:onClick="check"
         android:text="위 유의사항에 대하여 동의하십니까?" />
 
     <LinearLayout
