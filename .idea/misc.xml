@@ -9,6 +9,7 @@
         <entry key="..\:/AndroidProject/Moonkey_store/app/src/main/res/layout/activity_make_menu.xml" value="0.20208333333333334" />
         <entry key="..\:/AndroidProject/Moonkey_store/app/src/main/res/layout/activity_mypage.xml" value="0.3333333333333333" />
         <entry key="..\:/AndroidProject/Moonkey_store/app/src/main/res/layout/activity_personal_information.xml" value="0.171225937183384" />
+        <entry key="..\:/AndroidProject/Moonkey_store/app/src/main/res/layout/activity_rider_info.xml" value="0.171225937183384" />
         <entry key="..\:/AndroidProject/Moonkey_store/app/src/main/res/layout/activity_searchid.xml" value="0.171225937183384" />
         <entry key="..\:/AndroidProject/Moonkey_store/app/src/main/res/layout/activity_searchpw.xml" value="0.1953125" />
         <entry key="..\:/AndroidProject/Moonkey_store/app/src/main/res/layout/activity_singup.xml" value="0.18840579710144928" />
@@ -18,6 +19,7 @@
         <entry key="..\:/AndroidProject/Moonkey_store/app/src/main/res/layout/fragment_history.xml" value="0.171225937183384" />
         <entry key="..\:/AndroidProject/Moonkey_store/app/src/main/res/layout/fragment_home.xml" value="0.14666666666666667" />
         <entry key="..\:/AndroidProject/Moonkey_store/app/src/main/res/layout/fragment_license.xml" value="0.4466666666666667" />
+        <entry key="..\:/AndroidProject/Moonkey_store/app/src/main/res/layout/fragment_make_store.xml" value="0.2667572463768116" />
         <entry key="..\:/AndroidProject/Moonkey_store/app/src/main/res/layout/fragment_productinfo.xml" value="0.20208333333333334" />
         <entry key="..\:/AndroidProject/Moonkey_store/app/src/main/res/layout/fragment_question.xml" value="0.171225937183384" />
         <entry key="..\:/AndroidProject/Moonkey_store/app/src/main/res/layout/fragment_riderhis.xml" value="0.171225937183384" />

@@ -26,6 +26,7 @@ public class MainActivity extends AppCompatActivity {
     private MenuAdapter adapter;
     private ArrayList<Menu> items = new ArrayList<Menu>();
     private NestedScrollView nestedScrollView;
+    private LinearLayout linearLayout;
 
     private ImageView openDrawer;
     private Button logout;
@@ -130,6 +131,16 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, QuestionActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        //마이페이지
+        linearLayout=findViewById(R.id.linearLayout5);
+        linearLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, MypageActivity.class);
                 startActivity(intent);
             }
         });
