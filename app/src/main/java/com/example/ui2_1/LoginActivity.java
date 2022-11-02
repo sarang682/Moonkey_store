@@ -59,8 +59,8 @@ public class LoginActivity extends AppCompatActivity {
         join.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                Intent intent = new Intent(LoginActivity.this, JoinActivity.class);
-//                startActivity(intent);
+                Intent intent = new Intent(LoginActivity.this, JoinActivity.class);
+                startActivity(intent);
             }
         }); // 회원가입 리스너
 
