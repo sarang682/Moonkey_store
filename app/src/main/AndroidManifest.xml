@@ -48,6 +48,12 @@
         <activity
             android:name=".QuestionActivity"
             android:exported="true" />
+        <activity
+            android:name=".MyPageActivity"
+            android:exported="true" />
+        <activity
+            android:name=".EditAccountActivity"
+            android:exported="true" />
     </application>
 
 </manifest>

@@ -113,8 +113,8 @@
                 android:layout_height="match_parent"
                 android:layout_weight="700">
 
-                <EditText
-                    android:id="@+id/modify_id"
+                <TextView
+                    android:id="@+id/id"
                     android:background="@drawable/modify_edit"
                     android:layout_width="wrap_content"
                     android:layout_height="35dp"
@@ -185,7 +185,7 @@
                     android:id="@+id/modify_name_btn"
                     android:background="@drawable/btn_revice"
                     android:text="수정"
-                    android:layout_width="60dp"
+                    android:layout_width="70dp"
                     android:layout_height="35dp" />
 
             </LinearLayout>
@@ -243,7 +243,7 @@
                     android:id="@+id/modify_phoneNum_btn"
                     android:background="@drawable/btn_revice"
                     android:text="수정"
-                    android:layout_width="60dp"
+                    android:layout_width="70dp"
                     android:layout_height="35dp" />
 
             </LinearLayout>
@@ -306,7 +306,7 @@
             android:layout_weight="210">
 
             <EditText
-                android:id="@+id/modify_currently_pw_edit"
+                android:id="@+id/current_pw"
                 android:hint="현재 비밀번호를 입력하세요."
                 android:background="@drawable/edit"
                 android:paddingLeft="10dp"
@@ -326,7 +326,7 @@
             android:layout_weight="210">
 
             <EditText
-                android:id="@+id/modify_new_pw_edit"
+                android:id="@+id/new_pw"
                 android:hint="새 비밀번호를 입력하세요."
                 android:background="@drawable/edit"
                 android:paddingLeft="10dp"
@@ -346,7 +346,7 @@
             android:layout_weight="210">
 
             <EditText
-                android:id="@+id/modify_new_pwConfirm_edit"
+                android:id="@+id/new_pwconfirm"
                 android:hint="새 비밀번호를 한번 더 입력해주세요."
                 android:background="@drawable/edit"
                 android:paddingLeft="10dp"
