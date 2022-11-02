@@ -454,7 +454,7 @@
             android:layout_weight="210">
 
             <Button
-                android:id="@+id/history"
+                android:id="@+id/orderlist"
                 android:text="주문 접수 내역 모두 보기"
                 android:background="@drawable/btn_modify_pw"
                 android:layout_width="match_parent"
@@ -472,7 +472,7 @@
             android:layout_weight="210">
 
             <Button
-                android:id="@+id/modify_pw_btn"
+                android:id="@+id/modify"
                 android:text="개인 회원 정보 수정"
                 android:background="@drawable/btn_modify_pw"
                 android:layout_width="match_parent"
