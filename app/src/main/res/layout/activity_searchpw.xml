@@ -98,7 +98,7 @@
                 android:id="@+id/SearchPwbtn"
                 android:background="@drawable/btn_search"
                 android:layout_width="250dp"
-                android:layout_height="30dp" />
+                android:layout_height="40dp" />
 
 
         </LinearLayout>

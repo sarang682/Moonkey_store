@@ -1,20 +1,21 @@
 package com.example.ui2_1;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.view.menu.MenuAdapter;
 import androidx.core.widget.NestedScrollView;
+import androidx.drawerlayout.widget.DrawerLayout;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
 import android.widget.BaseAdapter;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.ListView;
-
-import com.example.ui2_1.R;
+import android.widget.ImageView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -25,6 +26,10 @@ public class MainActivity extends AppCompatActivity {
     private MenuAdapter adapter;
     private ArrayList<Menu> items = new ArrayList<Menu>();
     private NestedScrollView nestedScrollView;
+
+    private ImageView openDrawer;
+    private Button logout;
+    private LinearLayout review, orderlist, standing, question;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,6 +61,76 @@ public class MainActivity extends AppCompatActivity {
             public boolean onTouch(View view, MotionEvent motionEvent) {
                 nestedScrollView.requestDisallowInterceptTouchEvent(true);
                 return false;
+            }
+        });
+
+
+        //슬라이드 메뉴
+        final DrawerLayout drawerLayout= (DrawerLayout) findViewById(R.id.drawerLayout);
+        final View drawerView =findViewById(R.id.ll_drawer);
+        openDrawer=findViewById(R.id.iv_hamburger);
+
+        openDrawer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                drawerLayout.openDrawer(drawerView);
+            }
+
+        });
+
+        review=findViewById(R.id.review);
+        orderlist=findViewById(R.id.orderlist);
+        standing=findViewById(R.id.standing);
+
+        question=findViewById(R.id.question);
+
+        logout=findViewById(R.id.btnLogout);
+
+
+        //리뷰관리
+        review.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(MainActivity.this, "리뷰관리", Toast.LENGTH_SHORT).show();
+//                Intent intent = new Intent(LayoutSlide.this, .class);
+//                startActivity(intent);
+            }
+        });
+
+        //접수내역
+        orderlist.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, OrderListActivity.class);
+                startActivity(intent);
+            }
+        });
+
+
+        //입점신청
+        standing.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, StandActivity1.class);
+                startActivity(intent);
+            }
+        });
+
+        //로그아웃
+        logout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        //문의사항
+        question.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, QuestionActivity.class);
+                startActivity(intent);
             }
         });
 

@@ -107,10 +107,15 @@
                     android:padding="10dp">
 
                     <ImageView
+                        android:id="@+id/review"
+                        android:clickable="true"
+                        android:onClick="onClick"
+
                         android:layout_width="60dp"
                         android:layout_height="60dp"
                         android:layout_gravity="center"
-                        android:src="@drawable/ic_baseline_rate_review_24" />
+                        android:src="@drawable/ic_baseline_rate_review_24"
+                        />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -133,10 +138,15 @@
                     android:orientation="vertical">
 
                     <ImageView
+                        android:id="@+id/orderlist"
+                        android:clickable="true"
+                        android:onClick="onClick"
+
                         android:layout_width="60dp"
                         android:layout_height="60dp"
                         android:layout_gravity="center"
-                        android:src="@drawable/ic_baseline_list_alt_24" />
+                        android:src="@drawable/ic_baseline_list_alt_24"
+                        />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -160,8 +170,12 @@
                     android:padding="10dp">
 
                     <ImageView
+                        android:id="@+id/standing"
+                        android:clickable="true"
+                        android:onClick="onClick"
+
                         android:layout_width="60dp"
-                        android:layout_height="60dp"
+                        android:layout_height="51dp"
                         android:layout_gravity="center"
                         android:src="@drawable/ic_baseline_home_24" />
 

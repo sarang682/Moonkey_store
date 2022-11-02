@@ -33,6 +33,21 @@
         <activity
             android:name=".FindPwActivity"
             android:exported="true" />
+        <activity
+            android:name=".OrderListActivity"
+            android:exported="true" />
+        <activity
+            android:name=".StandActivity1"
+            android:exported="true" />
+        <activity
+            android:name=".StandActivity2"
+            android:exported="true" />
+        <activity
+            android:name=".MakeStoreActivity"
+            android:exported="true" />
+        <activity
+            android:name=".QuestionActivity"
+            android:exported="true" />
     </application>
 
 </manifest>
