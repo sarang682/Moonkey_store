@@ -28,20 +28,8 @@
             app:srcCompat="@drawable/ic_baseline_refresh_24" />
     </androidx.appcompat.widget.Toolbar>
 
-    <com.google.android.material.tabs.TabLayout
-        android:id="@+id/tab_layout"
+    <ListView
         android:layout_width="match_parent"
-        android:background="@color/white"
-        android:layout_height="wrap_content"
-        app:tabIndicatorColor="@color/black"
-        app:tabIndicatorFullWidth="false"
-        app:tabIndicatorHeight="4dp"
-        app:tabSelectedTextColor="@color/black" />
-
-    <androidx.viewpager2.widget.ViewPager2
-        android:id="@+id/pager"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1" />
-
+        android:layout_height="match_parent"
+        android:id="@+id/order_lv"/>
 </LinearLayout>

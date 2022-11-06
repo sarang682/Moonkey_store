@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Ui21">
         <activity
+            android:name=".OrderDetailActivity"
+            android:exported="true" />
+        <activity
             android:name=".MypageActivity"
             android:exported="true" />
         <activity
