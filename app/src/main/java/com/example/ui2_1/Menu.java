@@ -2,7 +2,7 @@ package com.example.ui2_1;
 
 public class Menu {
 
-    private String price;
+    private int price;
     private int number;
     private String name;
     private String option;
@@ -11,7 +11,7 @@ public class Menu {
 
 
 
-    public Menu(String price, int number, String name, String option, int menu_id, String comment) {
+    public Menu(int price, int number, String name, String option, int menu_id, String comment) {
         this.price = price;
         this.number = number;
         this.name = name;
@@ -20,7 +20,7 @@ public class Menu {
         this.comment=comment;
     }
 
-    public Menu(String price, String name, String comment) {
+    public Menu(int price, String name, String comment) {
         this.price = price;
         this.name = name;
         this.comment=comment;
@@ -33,11 +33,9 @@ public class Menu {
     public void setComment(String comment) {
         this.comment = comment;
     }
-    public String getPrice() {
-        return price;
-    }
+    public int getPrice() { return price; }
 
-    public void setPrice(String price) {
+    public void setPrice(int price) {
         this.price = price;
     }
 
