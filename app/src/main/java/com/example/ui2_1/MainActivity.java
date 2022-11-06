@@ -5,24 +5,27 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.widget.NestedScrollView;
 import androidx.drawerlayout.widget.DrawerLayout;
 
-import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
+    private TextView store_name;
     private Button btn_add;
     private ListView listView;
     private MenuAdapter adapter;
@@ -30,27 +33,31 @@ public class MainActivity extends AppCompatActivity {
     private NestedScrollView nestedScrollView;
     private LinearLayout linearLayout;
 
-    private ImageView openDrawer, mypage;
+    private ImageView openDrawer, mypage, searchbtn;
+    private EditText searchMenu;
     private Button logout;
     private LinearLayout review, orderlist, standing, question, editAccnt;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.fragment_home);
 
-
+        store_name=findViewById(R.id.tv_address);
         mypage=findViewById(R.id.mypage);
+        searchMenu=findViewById(R.id.searchmenu);
+        searchbtn=findViewById(R.id.searchbtn);
         btn_add=findViewById(R.id.imageView2);
         listView=findViewById(R.id.listView);
         nestedScrollView=findViewById(R.id.nested_scroll_view);
+
+        store_name.setText("가게 이름");
 
         //마이페이지
         mypage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent=new Intent(getApplicationContext(),MyPageActivity.class);
+                Intent intent=new Intent(getApplicationContext(), MypageActivity.class);
                 startActivity(intent);
             }
         });
@@ -65,11 +72,19 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        //상품 찾기
+        searchbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(MainActivity.this, searchMenu.getText()+"를 찾는중입니다.", Toast.LENGTH_SHORT).show();
+            }
+        });
+
         //리스트뷰
         listView=findViewById(R.id.listView);
         adapter=new MenuAdapter(items);
-        items.add(new Menu("10000원","떡볶이","밀떡으로 만들었어용"));
-        items.add(new Menu("21000원","로제떡볶이","쌀떡으로 만들었어용"));
+        items.add(new Menu(10000,"떡볶이","밀떡으로 만들었어용"));
+        items.add(new Menu(21000,"로제떡볶이","쌀떡으로 만들었어용"));
         listView.setAdapter(adapter);
 
         //
@@ -79,6 +94,19 @@ public class MainActivity extends AppCompatActivity {
             public boolean onTouch(View view, MotionEvent motionEvent) {
                 nestedScrollView.requestDisallowInterceptTouchEvent(true);
                 return false;
+            }
+        });
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Menu item = (Menu) adapter.getItem(position);
+                Intent intent=new Intent(MainActivity.this, MenuDetailActivity.class);
+                intent.putExtra("price",item.getPrice());
+                intent.putExtra("name",item.getName());
+                intent.putExtra("comment",item.getComment());
+                startActivity(intent);
+
             }
         });
 

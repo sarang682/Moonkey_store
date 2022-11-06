@@ -129,16 +129,7 @@
                 android:gravity="center"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="400">
-
-                <Button
-                    android:id="@+id/modify_menu_name_btn"
-                    android:background="@drawable/btn_revice"
-                    android:text="수정"
-                    android:layout_width="60dp"
-                    android:layout_height="35dp" />
-
-            </LinearLayout>
+                android:layout_weight="400"/>
 
         </LinearLayout>
 
@@ -185,16 +176,7 @@
                 android:gravity="center"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="400">
-
-                <Button
-                    android:id="@+id/modify_menu_cost_btn"
-                    android:background="@drawable/btn_revice"
-                    android:text="수정"
-                    android:layout_width="60dp"
-                    android:layout_height="35dp" />
-
-            </LinearLayout>
+                android:layout_weight="400"/>
 
         </LinearLayout>
         <LinearLayout
@@ -246,8 +228,8 @@
                 <Button
                     android:id="@+id/attached_file_btn"
                     android:background="@drawable/btn_revice"
-                    android:text="찾아보기"
-                    android:layout_width="60dp"
+                    android:text="찾기"
+                    android:layout_width="70dp"
                     android:layout_height="35dp" />
 
             </LinearLayout>
@@ -268,10 +250,10 @@
                 android:layout_weight="340">
 
                 <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:text="메뉴 상태"
-                    android:textSize="15dp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                    android:textSize="15dp" />
 
             </LinearLayout>
 
@@ -397,7 +379,7 @@
                 >
 
                 <EditText
-                    android:id="@+id/newitemname"
+                    android:id="@+id/optionname"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -410,7 +392,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:id="@+id/newitemcost"
+                    android:id="@+id/optioncost"
                     android:focusable="true"
                     android:focusableInTouchMode="true"
                     />
@@ -419,7 +401,7 @@
                     android:layout_width="90dp"
                     android:layout_height="wrap_content"
                     android:id="@+id/btnAdd"
-                    android:onClick="mOnClick"
+                    android:onClick="onClick"
                     />
 
                 <Button
@@ -427,7 +409,7 @@
                     android:layout_width="90dp"
                     android:layout_height="wrap_content"
                     android:id="@+id/btnDelete"
-                    android:onClick="mOnClick"
+                    android:onClick="onClick"
                     />
             </LinearLayout>
 
