@@ -119,9 +119,8 @@ public class MainActivity extends AppCompatActivity {
         review.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(MainActivity.this, "리뷰관리", Toast.LENGTH_SHORT).show();
-//                Intent intent = new Intent(LayoutSlide.this, .class);
-//                startActivity(intent);
+                Intent intent = new Intent(MainActivity.this, ReviewListActivity.class);
+                startActivity(intent);
             }
         });
 
