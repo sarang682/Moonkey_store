@@ -162,14 +162,14 @@ public class MainActivity extends AppCompatActivity {
         });
 
         //마이페이지
-        linearLayout=findViewById(R.id.linearLayout5);
-        linearLayout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, MypageActivity.class);
-                startActivity(intent);
-            }
-        });
+//        linearLayout=findViewById(R.id.linearLayout5);
+//        linearLayout.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent intent = new Intent(MainActivity.this, MyPageActivity.class);
+//                startActivity(intent);
+//            }
+//        });
 
 
         logout.setOnClickListener(new View.OnClickListener() {

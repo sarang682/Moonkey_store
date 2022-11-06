@@ -49,10 +49,16 @@ public class EditAccountActivity extends AppCompatActivity {
             }
         });
 
+        //비밀번호 변경
         modify_pw.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(EditAccountActivity.this, "비밀번호 변경이 완료되었습니다.", Toast.LENGTH_SHORT).show();
+                if(!check_new_pw(new_pw,new_pwconfirm)){
+                    Toast.makeText(EditAccountActivity.this, "비밀번호를 확인해주세요.", Toast.LENGTH_SHORT).show();
+                }else{
+                    Toast.makeText(EditAccountActivity.this, "비밀번호 변경이 완료되었습니다.", Toast.LENGTH_SHORT).show();
+                }
+                
             }
         });
 
@@ -74,5 +80,12 @@ public class EditAccountActivity extends AppCompatActivity {
         });
 
 
+    }
+
+    public boolean check_new_pw(EditText pw,EditText pw_confirm){
+        if(!pw.getText().toString().equals(pw_confirm.toString())){
+            return false;
+        }
+        return true;
     }
 }
