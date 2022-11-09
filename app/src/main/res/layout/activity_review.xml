@@ -278,7 +278,8 @@
                     android:gravity="center"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="1050">
+                    android:layout_weight="1050"
+                    android:orientation="vertical">
 
                     <EditText
                         android:hint="소중한 리뷰에 대한 감사한 마음을 담아 작성해주세요."
@@ -291,6 +292,10 @@
                         android:textSize="15dp"
                         android:textCursorDrawable="@drawable/cursor"
                         android:singleLine="true"/>
+                    <ListView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:id="@+id/comment_lv"/>
 
                 </LinearLayout>
 

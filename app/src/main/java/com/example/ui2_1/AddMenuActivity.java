@@ -95,7 +95,4 @@ public class AddMenuActivity extends AppCompatActivity {
             return true;
         else return false;
     }
-
-
-
 }

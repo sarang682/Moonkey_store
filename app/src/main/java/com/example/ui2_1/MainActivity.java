@@ -57,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
         mypage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent=new Intent(getApplicationContext(), MypageActivity.class);
+                Intent intent=new Intent(getApplicationContext(), MyPageActivity.class);
                 startActivity(intent);
             }
         });
@@ -224,7 +224,6 @@ public class MainActivity extends AppCompatActivity {
 
         ArrayList<Menu> items;
 
-        String user_id;
 
         public MenuAdapter(ArrayList<Menu> items){
             this.items=items;
