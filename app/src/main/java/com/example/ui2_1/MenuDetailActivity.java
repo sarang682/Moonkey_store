@@ -25,7 +25,8 @@ public class MenuDetailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragment_productinfo);
 
-        int price = getIntent().getIntExtra("price",0);
+//        int price = getIntent().getIntExtra("price",0);
+        String price = getIntent().getStringExtra("price");
         String name = getIntent().getStringExtra("name");
         String comment = getIntent().getStringExtra("comment");
 
@@ -41,7 +42,7 @@ public class MenuDetailActivity extends AppCompatActivity {
         Delete=findViewById(R.id.delete_menu);
         Complete=findViewById(R.id.complete);
 
-        Price.setText(Integer.toString(price));
+        Price.setText(price);
         Name.setText(name);
         Comment.setText(comment);
 

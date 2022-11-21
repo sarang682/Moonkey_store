@@ -129,8 +129,8 @@
             android:weightSum="1440">
 
             <EditText
-                android:id="@+id/InputName"
-                android:hint="이름"
+                android:id="@+id/InputAddr"
+                android:hint="주소"
                 android:paddingLeft="10dp"
                 android:layout_width="0dp"
                 android:layout_height="35dp"
@@ -156,7 +156,7 @@
                 android:layout_weight="1300"
                 android:background="@drawable/edit"
                 android:hint="닉네임"
-                android:inputType="number"
+                android:inputType="text"
                 android:maxLength="6"
                 android:paddingLeft="10dp"
                 android:singleLine="true"

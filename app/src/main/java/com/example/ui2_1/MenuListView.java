@@ -34,7 +34,7 @@ public class MenuListView extends LinearLayout {
     public void setName(String name) {
         text_name.setText(name);
     }
-    public void setPrice(int price){ text_price.setText(price+"원");}
+    public void setPrice(String price){ text_price.setText(price);}
     public void setComment(String comment){text_comment.setText(comment);}
 
 }

@@ -2,12 +2,15 @@ package com.example.ui2_1;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.view.menu.MenuAdapter;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.widget.NestedScrollView;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,6 +24,15 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
@@ -29,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
     private Button btn_add;
     private ListView listView;
     private MenuAdapter adapter;
-    private ArrayList<Menu> items = new ArrayList<Menu>();
+    private ArrayList<MenuItem> items = new ArrayList<MenuItem>();
     private NestedScrollView nestedScrollView;
     private LinearLayout linearLayout;
 
@@ -38,10 +50,15 @@ public class MainActivity extends AppCompatActivity {
     private Button logout;
     private LinearLayout review, orderlist, standing, question, editAccnt;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragment_home);
+
+        Intent intent = getIntent();
+        int length = Integer.parseInt(intent.getStringExtra("length"));
+        ArrayList<MenuItem> menulist = (ArrayList<MenuItem>) intent.getSerializableExtra("list");
 
         store_name=findViewById(R.id.tv_address);
         mypage=findViewById(R.id.mypage);
@@ -83,8 +100,12 @@ public class MainActivity extends AppCompatActivity {
         //리스트뷰
         listView=findViewById(R.id.listView);
         adapter=new MenuAdapter(items);
-        items.add(new Menu(10000,"떡볶이","밀떡으로 만들었어용"));
-        items.add(new Menu(21000,"로제떡볶이","쌀떡으로 만들었어용"));
+        for (int i = 0; i < length ;i++) {
+            items.add(new MenuItem(menulist.get(i).getMenuId(), menulist.get(i).getPrice(), menulist.get(i).getMenuName(),
+                    menulist.get(i).getOptions(), menulist.get(i).getDescript()));
+        }
+//        items.add(new Menu(10000,"떡볶이","밀떡으로 만들었어용"));
+//        items.add(new Menu(21000,"로제떡볶이","쌀떡으로 만들었어용"));
         listView.setAdapter(adapter);
 
         //
@@ -100,15 +121,17 @@ public class MainActivity extends AppCompatActivity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Menu item = (Menu) adapter.getItem(position);
+                MenuItem item = (MenuItem) adapter.getItem(position);
                 Intent intent=new Intent(MainActivity.this, MenuDetailActivity.class);
                 intent.putExtra("price",item.getPrice());
-                intent.putExtra("name",item.getName());
-                intent.putExtra("comment",item.getComment());
+                intent.putExtra("name",item.getMenuName());
+                intent.putExtra("comment",item.getDescript());
                 startActivity(intent);
 
             }
         });
+
+
 
 
         //슬라이드 메뉴
@@ -122,6 +145,14 @@ public class MainActivity extends AppCompatActivity {
                 drawerLayout.openDrawer(drawerView);
             }
 
+        });
+
+        ConstraintLayout constraintLayout = findViewById(R.id.constraintLayout);
+
+        constraintLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) { drawerLayout.closeDrawer(drawerView);
+            }
         });
 
         review=findViewById(R.id.review);
@@ -220,12 +251,16 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+
+
+
+
     class MenuAdapter extends BaseAdapter {
 
-        ArrayList<Menu> items;
+        ArrayList<MenuItem> items;
 
 
-        public MenuAdapter(ArrayList<Menu> items){
+        public MenuAdapter(ArrayList<MenuItem> items){
             this.items=items;
         }
 
@@ -234,7 +269,7 @@ public class MainActivity extends AppCompatActivity {
             return items.size();
         }
 
-        public void addItem(Menu i){
+        public void addItem(MenuItem i){
             items.add(i);
         }
 
@@ -258,10 +293,14 @@ public class MainActivity extends AppCompatActivity {
                 view = (MenuListView) convertView;
             }
 
-            Menu item = items.get(position);
-            view.setPrice(item.getPrice());
-            view.setName(item.getName());
-            view.setComment(item.getComment());
+            MenuItem item = items.get(position);
+//            view.setPrice(item.getPrice()+"원");
+//            view.setName(item.getMenuName());
+//            view.setComment(item.getDescript());
+
+            view.setName(item.getMenuName());
+            view.setPrice(item.getPrice()+"원");
+            view.setComment(item.getDescript());
 
 //            view.setOnClickListener(new View.OnClickListener() {
 //                @Override
