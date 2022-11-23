@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.ui2_1">
+    package="com.example.Moonkey_store">
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
@@ -16,19 +16,19 @@
         >
 
         <activity
-            android:name=".OrderDetailActivity"
+            android:name="com.example.Moonkey_store.OrderDetailActivity"
             android:exported="true" />
         <activity
-            android:name=".MyPageActivity"
+            android:name="com.example.Moonkey_store.MyPageActivity"
             android:exported="true" />
         <activity
-            android:name=".AddMenuActivity"
+            android:name="com.example.Moonkey_store.AddMenuActivity"
             android:exported="true" />
         <activity
-            android:name=".MainActivity"
+            android:name="com.example.Moonkey_store.MainActivity"
             android:exported="true" />
         <activity
-            android:name=".LoginActivity"
+            android:name="com.example.Moonkey_store.LoginActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -37,40 +37,40 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".JoinActivity"
+            android:name="com.example.Moonkey_store.JoinActivity"
             android:exported="true" />
         <activity
-            android:name=".FindAccountActivity"
+            android:name="com.example.Moonkey_store.FindAccountActivity"
             android:exported="true" />
         <activity
-            android:name=".FindPwActivity"
+            android:name="com.example.Moonkey_store.FindPwActivity"
             android:exported="true" />
         <activity
-            android:name=".OrderListActivity"
+            android:name="com.example.Moonkey_store.OrderListActivity"
             android:exported="true" />
         <activity
-            android:name=".StandActivity1"
+            android:name="com.example.Moonkey_store.StandActivity1"
             android:exported="true" />
         <activity
-            android:name=".StandActivity2"
+            android:name="com.example.Moonkey_store.StandActivity2"
             android:exported="true" />
         <activity
-            android:name=".MakeStoreActivity"
+            android:name="com.example.Moonkey_store.MakeStoreActivity"
             android:exported="true" />
         <activity
-            android:name=".QuestionActivity"
+            android:name="com.example.Moonkey_store.QuestionActivity"
             android:exported="true" />
         <activity
-            android:name=".EditAccountActivity"
+            android:name="com.example.Moonkey_store.EditAccountActivity"
             android:exported="true" />
         <activity
-            android:name=".ReviewListActivity"
+            android:name="com.example.Moonkey_store.ReviewListActivity"
             android:exported="true" />
         <activity
-            android:name=".ReviewDetailActivity"
+            android:name="com.example.Moonkey_store.ReviewDetailActivity"
             android:exported="true" />
         <activity
-            android:name=".MenuDetailActivity"
+            android:name="com.example.Moonkey_store.MenuDetailActivity"
             android:exported="true" />
     </application>
 
