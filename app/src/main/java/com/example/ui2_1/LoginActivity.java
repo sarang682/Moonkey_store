@@ -20,6 +20,8 @@ import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.gson.JsonObject;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -163,9 +165,16 @@ public class LoginActivity extends AppCompatActivity {
             //메소드 호출 완료 시 반환하는 변수에 버퍼 데이터 삽입 실시
             returnData = sb.toString();
 
+            //http 요청 응답 코드 확인 실시
+//            String responseCode = String.valueOf(conn.getResponseCode());
+            responseCode = conn.getResponseCode();
+            System.out.println("http 응답 코드 : " + responseCode);
+            System.out.println("http 응답 데이터 : " + returnData);
+
             //returnData를 json형식으로
             ArrayList<AccountItem> list = new ArrayList<AccountItem>();
             String uiD="";
+            String flag="";
             try {
                 JSONObject jsonObject = new JSONObject(returnData);
                 JSONObject accountJson = jsonObject.getJSONObject("accountDto");
@@ -176,30 +185,27 @@ public class LoginActivity extends AppCompatActivity {
                     String phone = accountJson.getString("phone");
                     String nickname = accountJson.getString("nickname");
                     String addr = accountJson.getString("addr");
-//                    String flag = JsonObject.getString("flag");
+                    flag = accountJson.getString("flag");
 
 //                    System.out.println("id:" + iD + "phone: " + phone +
 //                            "nickname: " + nickname + "addr:" + addr + "\n");
 
                     list.add(new AccountItem(iD, uiD, phone, addr, nickname));
                 }
+
+
+                if (responseCode == 200) {
+//                    if(flag.equals("1")){
+                        storeAccount(uiD,list);
+//                    }
+                } else {
+                    Toast.makeText(LoginActivity.this, "로그인에 실패하였습니다.", Toast.LENGTH_SHORT).show();
+                }
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-            //http 요청 응답 코드 확인 실시
-//            String responseCode = String.valueOf(conn.getResponseCode());
-            responseCode = conn.getResponseCode();
-            System.out.println("http 응답 코드 : " + responseCode);
-            System.out.println("http 응답 데이터 : " + returnData);
 
-            if (responseCode == 200) {
-//                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-//                startActivity(intent);
-                storeAccount(uiD,list);
-//                menulist(list);
-            } else {
-                Toast.makeText(LoginActivity.this, "로그인에 실패하였습니다.", Toast.LENGTH_SHORT).show();
-            }
+
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -258,6 +264,18 @@ public class LoginActivity extends AppCompatActivity {
             System.out.println("http 요청 주소 : " + UrlData);
             System.out.println("");
 
+            //http 요청 응답 코드 확인 실시
+            responseCode = conn.getResponseCode();
+            System.out.println("http 응답 코드 : " + responseCode);
+            System.out.println("http 응답 데이터 : " + returnData);
+
+            if(responseCode>200){
+                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                intent.putExtra("acclist", acclist);
+                startActivity(intent);
+            }
+
+
             //http 요청 후 응답 받은 데이터를 버퍼에 쌓는다
             br = new BufferedReader(new InputStreamReader(conn.getInputStream(), "UTF-8"));
             sb = new StringBuffer();
@@ -268,7 +286,7 @@ public class LoginActivity extends AppCompatActivity {
             //메소드 호출 완료 시 반환하는 변수에 버퍼 데이터 삽입 실시
             returnData = sb.toString();
 
-            //returnData를 json형식으로
+                        //returnData를 json형식으로
             ArrayList<StoreItem> storelist = new ArrayList<StoreItem>();
             String storeId="";
             try {
@@ -287,19 +305,12 @@ public class LoginActivity extends AppCompatActivity {
 
                     storelist.add(new StoreItem(storeId, name, address, category, contact));
                 }
-
-//                System.out.println("main에서 출력 : " + list.get(0).getMenuName());
-
-                menulist(storeId,acclist,storelist);
+                    menulist(storeId,acclist,storelist);
 
             } catch (JSONException e) {
                 e.printStackTrace();
             }
 
-            //http 요청 응답 코드 확인 실시
-            responseCode = conn.getResponseCode();
-            System.out.println("http 응답 코드 : " + responseCode);
-            System.out.println("http 응답 데이터 : " + returnData);
 
         } catch (IOException e) {
             e.printStackTrace();

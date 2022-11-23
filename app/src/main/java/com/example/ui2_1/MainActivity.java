@@ -50,28 +50,41 @@ public class MainActivity extends AppCompatActivity {
     private Button logout;
     private LinearLayout review, orderlist, standing, question, editAccnt;
     private TextView nick;
+    private String id, uid, phone, addr, nickname, strname, straddr, category, contact;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragment_home);
 
+
         Intent intent = getIntent();
-        int length = Integer.parseInt(intent.getStringExtra("menulength"));
-        ArrayList<MenuItem> menulist = (ArrayList<MenuItem>) intent.getSerializableExtra("menulist");
-        ArrayList<AccountItem> acclist = (ArrayList<AccountItem>) intent.getSerializableExtra("acclist");
-        ArrayList<StoreItem> strlist = (ArrayList<StoreItem>) intent.getSerializableExtra("storelist");
+        int length;
+        ArrayList<AccountItem> acclist;
+        ArrayList<StoreItem> strlist;
+        ArrayList<MenuItem> menulist;
 
-        String id = acclist.get(0).getId();
-        String uid = acclist.get(0).getUid();
-        String phone = acclist.get(0).getPhone();
-        String addr = acclist.get(0).getAddress();
-        String nickname = acclist.get(0).getNickname();
+        if(intent.hasExtra("menulength")&&intent.hasExtra("menulist")){
+            length = Integer.parseInt(intent.getStringExtra("menulength"));
+            menulist = (ArrayList<MenuItem>) intent.getSerializableExtra("menulist");
+            listview(length,menulist);
 
-        String strname = strlist.get(0).getName();
-        String straddr = strlist.get(0).getAddress();
-        String category = strlist.get(0).getCategory();
-        String contact = strlist.get(0).getContact();
+        }
+        if(intent.hasExtra("acclist")){
+            acclist = (ArrayList<AccountItem>) intent.getSerializableExtra("acclist");
+            id = acclist.get(0).getId();
+            uid = acclist.get(0).getUid();
+            phone = acclist.get(0).getPhone();
+            addr = acclist.get(0).getAddress();
+            nickname = acclist.get(0).getNickname();
+        }
+        if(intent.hasExtra("storelist")){
+            strlist = (ArrayList<StoreItem>) intent.getSerializableExtra("storelist");
+            strname = strlist.get(0).getName();
+            straddr = strlist.get(0).getAddress();
+            category = strlist.get(0).getCategory();
+            contact = strlist.get(0).getContact();
+        }
 
 
         store_name=findViewById(R.id.tv_address);
@@ -119,42 +132,6 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(MainActivity.this, searchMenu.getText()+"를 찾는중입니다.", Toast.LENGTH_SHORT).show();
             }
         });
-
-        //리스트뷰
-        listView=findViewById(R.id.listView);
-        adapter=new MenuAdapter(items);
-        for (int i = 0; i < length ;i++) {
-            items.add(new MenuItem(menulist.get(i).getMenuId(), menulist.get(i).getPrice(), menulist.get(i).getMenuName(),
-                    menulist.get(i).getOptions(), menulist.get(i).getDescript()));
-        }
-//        items.add(new Menu(10000,"떡볶이","밀떡으로 만들었어용"));
-//        items.add(new Menu(21000,"로제떡볶이","쌀떡으로 만들었어용"));
-        listView.setAdapter(adapter);
-
-        //
-        nestedScrollView=findViewById(R.id.nested_scroll_view);
-        listView.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View view, MotionEvent motionEvent) {
-                nestedScrollView.requestDisallowInterceptTouchEvent(true);
-                return false;
-            }
-        });
-
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                MenuItem item = (MenuItem) adapter.getItem(position);
-                Intent intent=new Intent(MainActivity.this, MenuDetailActivity.class);
-                intent.putExtra("price",item.getPrice());
-                intent.putExtra("name",item.getMenuName());
-                intent.putExtra("comment",item.getDescript());
-                startActivity(intent);
-
-            }
-        });
-
-
 
 
         //슬라이드 메뉴
@@ -279,6 +256,41 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+    private void listview(int length, ArrayList<MenuItem> menulist){
+        //리스트뷰
+        listView=findViewById(R.id.listView);
+        adapter=new MenuAdapter(items);
+        for (int i = 0; i < length ;i++) {
+            items.add(new MenuItem(menulist.get(i).getMenuId(), menulist.get(i).getPrice(), menulist.get(i).getMenuName(),
+                    menulist.get(i).getOptions(), menulist.get(i).getDescript()));
+        }
+//        items.add(new Menu(10000,"떡볶이","밀떡으로 만들었어용"));
+//        items.add(new Menu(21000,"로제떡볶이","쌀떡으로 만들었어용"));
+        listView.setAdapter(adapter);
+
+        //
+        nestedScrollView=findViewById(R.id.nested_scroll_view);
+        listView.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                nestedScrollView.requestDisallowInterceptTouchEvent(true);
+                return false;
+            }
+        });
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                MenuItem item = (MenuItem) adapter.getItem(position);
+                Intent intent=new Intent(MainActivity.this, MenuDetailActivity.class);
+                intent.putExtra("price",item.getPrice());
+                intent.putExtra("name",item.getMenuName());
+                intent.putExtra("comment",item.getDescript());
+                startActivity(intent);
+
+            }
+        });
+    }
 
 
 
