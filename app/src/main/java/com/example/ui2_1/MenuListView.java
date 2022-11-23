@@ -35,7 +35,12 @@ public class MenuListView extends LinearLayout {
         text_name.setText(name);
     }
     public void setPrice(String price){ text_price.setText(price);}
-    public void setComment(String comment){text_comment.setText(comment);}
+    public void setComment(String comment){
+        if(comment.length()==0||comment.equals("null")){
+            text_comment.setText("");
+        }
+        else{text_comment.setText(comment);}
+    }
 
 }
 

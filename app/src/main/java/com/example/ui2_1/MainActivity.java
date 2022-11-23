@@ -49,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
     private EditText searchMenu;
     private Button logout;
     private LinearLayout review, orderlist, standing, question, editAccnt;
-
+    private TextView nick;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,8 +57,22 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.fragment_home);
 
         Intent intent = getIntent();
-        int length = Integer.parseInt(intent.getStringExtra("length"));
-        ArrayList<MenuItem> menulist = (ArrayList<MenuItem>) intent.getSerializableExtra("list");
+        int length = Integer.parseInt(intent.getStringExtra("menulength"));
+        ArrayList<MenuItem> menulist = (ArrayList<MenuItem>) intent.getSerializableExtra("menulist");
+        ArrayList<AccountItem> acclist = (ArrayList<AccountItem>) intent.getSerializableExtra("acclist");
+        ArrayList<StoreItem> strlist = (ArrayList<StoreItem>) intent.getSerializableExtra("storelist");
+
+        String id = acclist.get(0).getId();
+        String uid = acclist.get(0).getUid();
+        String phone = acclist.get(0).getPhone();
+        String addr = acclist.get(0).getAddress();
+        String nickname = acclist.get(0).getNickname();
+
+        String strname = strlist.get(0).getName();
+        String straddr = strlist.get(0).getAddress();
+        String category = strlist.get(0).getCategory();
+        String contact = strlist.get(0).getContact();
+
 
         store_name=findViewById(R.id.tv_address);
         mypage=findViewById(R.id.mypage);
@@ -67,14 +81,23 @@ public class MainActivity extends AppCompatActivity {
         btn_add=findViewById(R.id.imageView2);
         listView=findViewById(R.id.listView);
         nestedScrollView=findViewById(R.id.nested_scroll_view);
+        nick = findViewById(R.id.id_txt);
 
-        store_name.setText("가게 이름");
+        store_name.setText(strname);
 
-        //마이페이지
+        //마이페이지(가게)
         mypage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent=new Intent(getApplicationContext(), MyPageActivity.class);
+                intent.putExtra("id",id);
+                intent.putExtra("nick",nickname);
+                intent.putExtra("phone",phone);
+
+                intent.putExtra("strname",strname);
+                intent.putExtra("straddr",straddr);
+                intent.putExtra("category",category);
+                intent.putExtra("contact",contact);
                 startActivity(intent);
             }
         });
@@ -138,6 +161,7 @@ public class MainActivity extends AppCompatActivity {
         final DrawerLayout drawerLayout= (DrawerLayout) findViewById(R.id.drawerLayout);
         final View drawerView =findViewById(R.id.ll_drawer);
         openDrawer=findViewById(R.id.iv_hamburger);
+        nick.setText(id+"("+nickname+")");
 
         openDrawer.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -170,6 +194,9 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, EditAccountActivity.class);
+                intent.putExtra("id",id);
+                intent.putExtra("nick",nickname);
+                intent.putExtra("phone",phone);
                 startActivity(intent);
             }
         });

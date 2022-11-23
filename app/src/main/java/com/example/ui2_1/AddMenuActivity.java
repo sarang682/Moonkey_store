@@ -63,7 +63,7 @@ public class AddMenuActivity extends AppCompatActivity {
                 String price=tv_price.getText().toString();
                 String description=tv_explain.getText().toString();
 
-                if(isNull(tv_menu)||isNull(tv_price)||isNull(tv_explain)){
+                if(isNull(tv_menu)||isNull(tv_price)){
                     Toast.makeText(getApplicationContext(), "빈칸을 확인해 주세요.", Toast.LENGTH_SHORT).show();
                 }else{
                     addMenu(menuName, options, price, description);
@@ -185,8 +185,9 @@ public class AddMenuActivity extends AppCompatActivity {
             e.printStackTrace();
         } finally {
             if(responseCode==200){
-                Intent intent = new Intent(AddMenuActivity.this, MainActivity.class);
-                startActivity(intent);
+                Toast.makeText (AddMenuActivity.this, "상품 등록에 성공하였습니다.", Toast.LENGTH_SHORT).show();
+//                Intent intent = new Intent(AddMenuActivity.this, MainActivity.class);
+//                startActivity(intent);
             }else{
                 Toast.makeText (AddMenuActivity.this, "상품 등록에 실패하였습니다.", Toast.LENGTH_SHORT).show();
             }

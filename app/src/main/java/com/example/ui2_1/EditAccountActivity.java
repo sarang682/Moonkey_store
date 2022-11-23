@@ -17,12 +17,19 @@ public class EditAccountActivity extends AppCompatActivity {
 
     private EditText nickname, phonenum, current_pw, new_pw, new_pwconfirm;
     private Button modify_nickname, modify_phonenum, modify_pw, unregister;
+    private TextView ID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragment_account_modify);
 
+        Intent intent = getIntent();
+        String id = intent.getStringExtra("id");
+        String nick = intent.getStringExtra("nick");
+        String phone = intent.getStringExtra("phone");
+
+        ID=findViewById(R.id.id);
         nickname=findViewById(R.id.modify_nickname);
         phonenum=findViewById(R.id.modify_phoneNum);
         modify_nickname=findViewById(R.id.modify_name_btn);
@@ -33,6 +40,10 @@ public class EditAccountActivity extends AppCompatActivity {
         new_pwconfirm=findViewById(R.id.new_pwconfirm);
         modify_pw=findViewById(R.id.modify_pw_btn);
         unregister=findViewById(R.id.unregister_btn);
+
+        ID.setText(id);
+        nickname.setText(nick);
+        phonenum.setText(phone);
 
 
         modify_nickname.setOnClickListener(new View.OnClickListener() {

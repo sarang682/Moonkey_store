@@ -19,7 +19,7 @@
             android:name=".OrderDetailActivity"
             android:exported="true" />
         <activity
-            android:name=".MypageActivity"
+            android:name=".MyPageActivity"
             android:exported="true" />
         <activity
             android:name=".AddMenuActivity"

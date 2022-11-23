@@ -513,11 +513,10 @@
                             android:src="@drawable/profile" />
 
                         <TextView
-                            android:layout_width="match_parent"
+                            android:id="@+id/id_txt"                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:layout_weight="1"
-                            android:text="(이름) 닉네임"
                             android:textColor="#000"
                             android:textSize="20sp" />
 
