@@ -18,11 +18,15 @@ public class StandActivity1 extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_howtostanding);
 
+        Intent intent = getIntent();
+        String token=intent.getStringExtra("token");
+
         standing=findViewById(R.id.standing_point_btn);
         standing.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(StandActivity1.this, StandActivity2.class);
+                intent.putExtra("token",token);
                 startActivity(intent);
             }
         });

@@ -36,8 +36,10 @@
                 android:layout_height="wrap_content"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.233"
                 app:layout_constraintStart_toEndOf="@+id/iv_hamburger"
-                app:layout_constraintTop_toTopOf="parent">
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.55">
 
                 <TextView
                     android:id="@+id/tv_address"
@@ -46,15 +48,21 @@
                     android:text="가게A"
                     android:textAlignment="center"
                     android:textColor="#000"
-                    android:textSize="18sp" />
+                    android:textSize="18sp"
+                    tools:layout_editor_absoluteX="47dp"
+                    tools:layout_editor_absoluteY="11dp" />
 
                 <ImageView
                     android:id="@+id/mypage"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="4dp"
-                    android:src="@drawable/ic_baseline_arrow_drop_down_circle_24" />
+                    android:src="@drawable/ic_baseline_arrow_drop_down_circle_24"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    />
+
             </LinearLayout>
+
+
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -63,7 +71,7 @@
                 android:layout_marginRight="15dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/tv_address"
+                app:layout_constraintStart_toEndOf="@+id/mypage"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:ignore="NotSibling">
 
@@ -74,7 +82,7 @@
                     android:layout_toLeftOf="@+id/sw"
                     android:layout_marginRight="10dp"
                     android:textColor="#000000"
-                    android:textSize="15dp"
+                    android:textSize="12dp"
                     android:textStyle="bold"
                     android:text="close"/>
 
@@ -87,22 +95,23 @@
                     android:thumb="@drawable/switch_thumb_selector"
                     android:text=""
                     android:textOn=""
-                    android:textOff=""/>
+                    android:textOff=""
+                    tools:ignore="UseSwitchCompatOrMaterialXml" />
 
                 <TextView
+                    android:id="@+id/store_state"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
                     android:layout_toRightOf="@+id/sw"
                     android:layout_marginLeft="10dp"
-                    android:textColor="#FF0000"
-                    android:textSize="15dp"
+                    android:textColor="#000000"
+                    android:textSize="12dp"
                     android:textStyle="bold"
                     android:text="open"/>
             </LinearLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
-
         <View
             android:id="@+id/view"
             android:layout_width="0dp"

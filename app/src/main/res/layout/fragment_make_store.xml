@@ -40,11 +40,23 @@
             android:layout_weight="180"
             android:weightSum="1440">
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginTop="10dp"
+                android:text="카테고리"
+                android:textSize="15dp"
+                android:gravity="center"
+                />
+
             <Spinner
-                android:id="@+id/spinner_taxation"
-                android:layout_width="match_parent"
-                android:layout_height="35dp"
-                android:layout_weight="300" />
+                android:id="@+id/spinner_category"
+                android:layout_width="250dp"
+                android:layout_height="30dp"
+                android:layout_weight="300"
+                android:layout_marginTop="10dp"
+                />
 
         </LinearLayout>
 
@@ -57,7 +69,7 @@
             android:weightSum="1440">
 
             <EditText
-                android:id="@+id/Input_corporate_registration_number"
+                android:id="@+id/corporate_num"
                 android:hint="사업자 등록 번호를 입력해 주세요."
                 android:paddingLeft="10dp"
                 android:layout_width="0dp"
@@ -77,7 +89,7 @@
             android:weightSum="1440">
 
             <EditText
-                android:id="@+id/Input_business_conditions"
+                android:id="@+id/business_conditions"
                 android:hint="업태"
                 android:paddingLeft="10dp"
                 android:layout_width="0dp"
@@ -87,27 +99,6 @@
                 android:background="@drawable/edit"
                 android:textCursorDrawable="@drawable/cursor"
                 android:singleLine="true"/>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:gravity="center"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="180"
-            android:weightSum="1440">
-
-            <EditText
-                android:id="@+id/Input_event"
-                android:hint="종목"
-                android:paddingLeft="10dp"
-                android:layout_width="0dp"
-                android:layout_height="35dp"
-                android:layout_weight="1300"
-                android:textSize="15dp"
-                android:background="@drawable/edit"
-                android:textCursorDrawable="@drawable/cursor"
-                android:singleLine="true" />
 
         </LinearLayout>
         <LinearLayout
@@ -121,11 +112,34 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textStyle="bold"
-                android:text="▶ 업태와 종목은 한글로만 입력해주세요."
+                android:text="▶ 업태는 한글로만 입력해주세요."
                 android:textColor="#FF5722"
                 android:textSize="12sp" />
 
         </LinearLayout>
+
+        <LinearLayout
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="180"
+            android:weightSum="1440">
+
+            <EditText
+                android:id="@+id/Input_contact"
+                android:hint="전화번호 ( - 없이 입력해주세요. )"
+                android:inputType="number"
+                android:paddingLeft="10dp"
+                android:layout_width="0dp"
+                android:layout_height="35dp"
+                android:layout_weight="1300"
+                android:textSize="15dp"
+                android:background="@drawable/edit"
+                android:textCursorDrawable="@drawable/cursor"
+                android:singleLine="true" />
+
+        </LinearLayout>
+
 
         <LinearLayout
             android:gravity="center"
@@ -156,8 +170,8 @@
             android:weightSum="1440">
 
             <EditText
-                android:id="@+id/representative"
-                android:hint="대표자명"
+                android:id="@+id/description"
+                android:hint="가게 설명을 입력해주세요."
                 android:paddingLeft="10dp"
                 android:layout_width="0dp"
                 android:layout_height="35dp"
@@ -200,6 +214,7 @@
 
                 <EditText
                     android:id="@+id/store_address"
+                    android:hint="주소를 입력해주세요."
                     android:background="@drawable/modify_edit"
                     android:layout_width="wrap_content"
                     android:layout_height="35dp"
@@ -220,7 +235,7 @@
                     android:id="@+id/store_address_btn"
                     android:background="@drawable/btn_revice"
                     android:text="주소 찾기"
-                    android:layout_width="60dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="35dp" />
 
             </LinearLayout>
@@ -276,7 +291,7 @@
                     android:id="@+id/store_logo_btn"
                     android:background="@drawable/btn_revice"
                     android:text="찾아보기"
-                    android:layout_width="60dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="35dp" />
 
             </LinearLayout>
@@ -335,7 +350,7 @@
             android:text="승인 상담 신청 후 가게 등록 완료하기"
             android:id="@+id/wait_approval_btn"
             android:background="@drawable/btn_signup"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="35dp"
             android:layout_weight="1300" />
 

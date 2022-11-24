@@ -52,18 +52,21 @@ public class MainActivity extends AppCompatActivity {
     private LinearLayout review, orderlist, standing, question, editAccnt;
     private TextView nick;
     private String id, uid, phone, addr, nickname, storeId, strname, straddr, category, contact;
+    private int length;
+
+
+    private ArrayList<AccountItem> acclist;
+    private ArrayList<StoreItem> strlist;
+    private ArrayList<MenuItem> menulist;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragment_home);
 
-
         Intent intent = getIntent();
-        int length;
-        ArrayList<AccountItem> acclist;
-        ArrayList<StoreItem> strlist;
-        ArrayList<MenuItem> menulist;
+        String token=intent.getStringExtra("token");
+
 
         if(intent.hasExtra("acclist")){
             acclist = (ArrayList<AccountItem>) intent.getSerializableExtra("acclist");
@@ -80,6 +83,11 @@ public class MainActivity extends AppCompatActivity {
             straddr = strlist.get(0).getAddress();
             category = strlist.get(0).getCategory();
             contact = strlist.get(0).getContact();
+
+            store_name.setText(strname);
+            if(strname.length()>5){
+                store_name.setTextSize(TypedValue.COMPLEX_UNIT_SP, 15);
+            }
         }
         if(intent.hasExtra("menulength")&&intent.hasExtra("menulist")){
             length = Integer.parseInt(intent.getStringExtra("menulength"));
@@ -97,10 +105,6 @@ public class MainActivity extends AppCompatActivity {
         nestedScrollView=findViewById(R.id.nested_scroll_view);
         nick = findViewById(R.id.id_txt);
 
-        store_name.setText(strname);
-        if(strname.length()>5){
-            store_name.setTextSize(TypedValue.COMPLEX_UNIT_SP, 15);
-        }
 
         //마이페이지(가게)
         mypage.setOnClickListener(new View.OnClickListener() {
@@ -187,7 +191,13 @@ public class MainActivity extends AppCompatActivity {
         review.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ReviewList(storeId);
+                if(!storeId.equals("null")){
+                    ReviewList(storeId);
+                }else{
+                    Toast.makeText(getApplicationContext(), "리뷰가 존재하지 않습니다.", Toast.LENGTH_SHORT).show();
+
+                }
+
 //                Intent intent = new Intent(MainActivity.this, ReviewListActivity.class);
 //                startActivity(intent);
             }
@@ -208,6 +218,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, StandActivity1.class);
+                intent.putExtra("token",token);
                 startActivity(intent);
             }
         });

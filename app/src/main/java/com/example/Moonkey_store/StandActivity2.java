@@ -18,11 +18,15 @@ public class StandActivity2 extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_standing_point);
 
+        Intent intent = getIntent();
+        String token=intent.getStringExtra("token");
+
         make_store=findViewById(R.id.make_store_btn);
         make_store.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(StandActivity2.this, MakeStoreActivity.class);
+                intent.putExtra("token",token);
                 startActivity(intent);
             }
         });

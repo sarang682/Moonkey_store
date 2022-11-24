@@ -163,6 +163,8 @@ public class LoginActivity extends AppCompatActivity {
             ArrayList<AccountItem> list = new ArrayList<AccountItem>();
             String uiD="";
             String flag="";
+            String token = "";
+
             try {
                 JSONObject jsonObject = new JSONObject(returnData);
                 JSONObject accountJson = jsonObject.getJSONObject("accountDto");
@@ -180,11 +182,14 @@ public class LoginActivity extends AppCompatActivity {
 
                     list.add(new AccountItem(iD, uiD, phone, addr, nickname));
                 }
+                token = jsonObject.getString("token");
+                token = "Bearer " + token.trim();
+                System.out.println("token: " + token);
 
 
                 if (responseCode == 200) {
 //                    if(flag.equals("1")){
-                        storeAccount(uiD,list);
+                        storeAccount(uiD,list,token);
 //                    }
                 } else {
                     Toast.makeText(LoginActivity.this, "로그인에 실패하였습니다.", Toast.LENGTH_SHORT).show();
@@ -209,7 +214,7 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
-    private void storeAccount(String uid, ArrayList<AccountItem> acclist) {
+    private void storeAccount(String uid, ArrayList<AccountItem> acclist, String token) {
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
 
@@ -260,6 +265,7 @@ public class LoginActivity extends AppCompatActivity {
             if(responseCode>200){
                 Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                 intent.putExtra("acclist", acclist);
+                intent.putExtra("token", token);
                 startActivity(intent);
             }
 
@@ -293,7 +299,7 @@ public class LoginActivity extends AppCompatActivity {
 
                     storelist.add(new StoreItem(storeId, name, address, category, contact));
                 }
-                    menulist(storeId,acclist,storelist);
+                    menulist(storeId,acclist,storelist,token);
 
             } catch (JSONException e) {
                 e.printStackTrace();
@@ -316,7 +322,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
 
-    private void menulist(String storeId, ArrayList<AccountItem> acclist,  ArrayList<StoreItem> storelist) {
+    private void menulist(String storeId, ArrayList<AccountItem> acclist,  ArrayList<StoreItem> storelist, String token) {
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
 
@@ -395,8 +401,8 @@ public class LoginActivity extends AppCompatActivity {
                 intent.putExtra("acclist", acclist);
                 intent.putExtra("storelist", storelist);
                 intent.putExtra("menulist", list);
+                intent.putExtra("token", token);
                 startActivity(intent);
-
 
             } catch (JSONException e) {
                 e.printStackTrace();
