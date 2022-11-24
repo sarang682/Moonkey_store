@@ -34,10 +34,14 @@ public class AddMenuActivity extends AppCompatActivity {
     Uri uri;
     Bitmap bitmap;
     TextView tv_img;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_make_menu);
+
+        Intent intent = getIntent();
+        String storeId = intent.getStringExtra("storeId");
 
         tv_menu=findViewById(R.id.make_menu_name);
         tv_price=findViewById(R.id.make_menu_cost);
@@ -65,7 +69,7 @@ public class AddMenuActivity extends AppCompatActivity {
                 if(isNull(tv_menu)||isNull(tv_price)){
                     Toast.makeText(getApplicationContext(), "빈칸을 확인해 주세요.", Toast.LENGTH_SHORT).show();
                 }else{
-                    addMenu(menuName, options, price, description);
+                    addMenu(storeId, menuName, options, price, description);
                 }
             }
         });
@@ -109,14 +113,13 @@ public class AddMenuActivity extends AppCompatActivity {
         else return false;
     }
 
-    private void addMenu(String menuName, String options, String price, String description) {
+    private void addMenu(String storeId, String menuName, String options, String price, String description) {
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
 
         //http 요청 시 필요한 url 주소를 변수 선언
         String totalUrl = "";
-        String UrlData = "http://165.229.86.152:8293/app/store/1/menu/reg"; //storeid 1 메뉴 추가
-//        String UrlData = "http://165.229.86.152:8293/app/store/" + {storeId} + "/menu/reg\n";
+        String UrlData = "http://165.229.86.152:8293/app/store/" + storeId + "/menu/reg";
 
         totalUrl = UrlData.trim().toString();
 

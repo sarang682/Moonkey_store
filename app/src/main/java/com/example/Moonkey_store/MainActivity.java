@@ -11,6 +11,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.StrictMode;
+import android.util.TypedValue;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -64,12 +65,6 @@ public class MainActivity extends AppCompatActivity {
         ArrayList<StoreItem> strlist;
         ArrayList<MenuItem> menulist;
 
-        if(intent.hasExtra("menulength")&&intent.hasExtra("menulist")){
-            length = Integer.parseInt(intent.getStringExtra("menulength"));
-            menulist = (ArrayList<MenuItem>) intent.getSerializableExtra("menulist");
-            listview(length,menulist);
-
-        }
         if(intent.hasExtra("acclist")){
             acclist = (ArrayList<AccountItem>) intent.getSerializableExtra("acclist");
             id = acclist.get(0).getId();
@@ -86,6 +81,11 @@ public class MainActivity extends AppCompatActivity {
             category = strlist.get(0).getCategory();
             contact = strlist.get(0).getContact();
         }
+        if(intent.hasExtra("menulength")&&intent.hasExtra("menulist")){
+            length = Integer.parseInt(intent.getStringExtra("menulength"));
+            menulist = (ArrayList<MenuItem>) intent.getSerializableExtra("menulist");
+            listview(storeId, length,menulist);
+        }
 
 
         store_name=findViewById(R.id.tv_address);
@@ -98,6 +98,9 @@ public class MainActivity extends AppCompatActivity {
         nick = findViewById(R.id.id_txt);
 
         store_name.setText(strname);
+        if(strname.length()>5){
+            store_name.setTextSize(TypedValue.COMPLEX_UNIT_SP, 15);
+        }
 
         //마이페이지(가게)
         mypage.setOnClickListener(new View.OnClickListener() {
@@ -122,6 +125,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent=new Intent(getApplicationContext(),AddMenuActivity.class);
+                intent.putExtra("storeId",storeId);
                 startActivity(intent);
             }
         });
@@ -355,7 +359,7 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-    private void listview(int length, ArrayList<MenuItem> menulist){
+    private void listview(String storeId, int length, ArrayList<MenuItem> menulist){
         //리스트뷰
         listView=findViewById(R.id.listView);
         adapter=new MenuAdapter(items);
@@ -385,6 +389,7 @@ public class MainActivity extends AppCompatActivity {
                 intent.putExtra("price",item.getPrice());
                 intent.putExtra("name",item.getMenuName());
                 intent.putExtra("comment",item.getDescript());
+                intent.putExtra("storeId",storeId);
                 startActivity(intent);
 
             }
