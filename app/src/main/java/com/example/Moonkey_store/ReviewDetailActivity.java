@@ -69,6 +69,7 @@ public class ReviewDetailActivity extends AppCompatActivity {
             }
         });
 
+        /*
         //댓글 리스트뷰
         comment_lv=findViewById(R.id.comment_lv);
         items=new ArrayList<String>();
@@ -85,6 +86,8 @@ public class ReviewDetailActivity extends AppCompatActivity {
 
         adapter=new ArrayAdapter<String>(getApplicationContext(),android.R.layout.simple_list_item_1,items);
         comment_lv.setAdapter(adapter);
+
+         */
     }
 
 

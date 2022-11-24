@@ -26,12 +26,16 @@ public class ReviewListActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragment_reviewlist);
 
+        Intent intent = getIntent();
+        ArrayList<ReviewItem> list = (ArrayList<ReviewItem>)intent.getSerializableExtra("list");
+        int length = Integer.parseInt(intent.getStringExtra("length"));
+
+
         lView=findViewById(R.id.ListView);
         adapter=new ItemAdapter(items);
-        items.add(new ReviewItem("김세모","4.0","맛있어용"));
-        items.add(new ReviewItem("박네모","4.5","최고에요"));
-        items.add(new ReviewItem("이동글","5.0","다음에 또 시킬게요"));
-        items.add(new ReviewItem("정수박","5.0","잘먹을게용"));
+        for(int i =0; i<length; i++){
+            items.add(new ReviewItem(list.get(i).getNickname(),list.get(i).getScore(),list.get(i).getContents()));
+        }
 
         lView.setAdapter(adapter);
 

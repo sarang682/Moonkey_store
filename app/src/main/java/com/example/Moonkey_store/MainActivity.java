@@ -5,10 +5,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.widget.NestedScrollView;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,6 +24,15 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
@@ -39,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
     private Button logout;
     private LinearLayout review, orderlist, standing, question, editAccnt;
     private TextView nick;
-    private String id, uid, phone, addr, nickname, strname, straddr, category, contact;
+    private String id, uid, phone, addr, nickname, storeId, strname, straddr, category, contact;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,6 +80,7 @@ public class MainActivity extends AppCompatActivity {
         }
         if(intent.hasExtra("storelist")){
             strlist = (ArrayList<StoreItem>) intent.getSerializableExtra("storelist");
+            storeId = strlist.get(0).getStoreId();
             strname = strlist.get(0).getName();
             straddr = strlist.get(0).getAddress();
             category = strlist.get(0).getCategory();
@@ -171,8 +183,9 @@ public class MainActivity extends AppCompatActivity {
         review.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, ReviewListActivity.class);
-                startActivity(intent);
+                ReviewList(storeId);
+//                Intent intent = new Intent(MainActivity.this, ReviewListActivity.class);
+//                startActivity(intent);
             }
         });
 
@@ -243,6 +256,103 @@ public class MainActivity extends AppCompatActivity {
         });
 
     }
+
+    private void ReviewList(String strid){
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+        StrictMode.setThreadPolicy(policy);
+
+        //http 요청 시 url 주소와 파라미터 데이터를 결합하기 위한 변수 선언
+        //http 요청 시 필요한 url 주소를 변수 선언
+        String totalUrl = "";
+        String UrlData = "http://165.229.86.152:8293/app/review/"+strid+""; // 가게별 리뷰리스트
+        totalUrl = UrlData.trim().toString();
+
+        int responseCode = 0;
+
+        //http 통신을 하기위한 객체 선언 실시
+        URL url = null;
+        HttpURLConnection conn = null;
+
+        //http 통신 요청 후 응답 받은 데이터를 담기 위한 변수
+        String responseData = "";
+        BufferedReader br = null;
+        StringBuffer sb = null;
+
+        //메소드 호출 결과값을 반환하기 위한 변수
+        String returnData = "";
+
+        try {
+            //파라미터로 들어온 url을 사용해 connection 실시
+            url = new URL(totalUrl);
+            conn = (HttpURLConnection) url.openConnection();
+
+            //http 요청에 필요한 타입 정의 실시
+            conn.setRequestProperty("Accept", "application/json");
+            conn.setRequestMethod("GET");
+
+            //http 요청 실시
+            conn.connect();
+            System.out.println("http 요청 방식 : " + "GET");
+            System.out.println("http 요청 타입 : " + "application/json");
+            System.out.println("http 요청 주소 : " + UrlData);
+            System.out.println("");
+
+            //http 요청 후 응답 받은 데이터를 버퍼에 쌓는다
+            br = new BufferedReader(new InputStreamReader(conn.getInputStream(), "UTF-8"));
+            sb = new StringBuffer();
+            while ((responseData = br.readLine()) != null) {
+                sb.append(responseData); //StringBuffer에 응답받은 데이터 순차적으로 저장 실시
+            }
+
+            //메소드 호출 완료 시 반환하는 변수에 버퍼 데이터 삽입 실시
+            returnData = sb.toString();
+
+            //returnData를 json형식으로
+            ArrayList<ReviewItem> list = new ArrayList<ReviewItem>();
+
+            try {
+                JSONArray jsonArray = new JSONArray(returnData);
+
+                for (int i = 0; i < jsonArray.length(); i++) {
+                    JSONObject JsonObject = jsonArray.getJSONObject(i);
+                    String nickname = JsonObject.getString("nickname");
+                    String stars = JsonObject.getString("stars");
+                    String content = JsonObject.getString("content");
+
+                    list.add(new ReviewItem(nickname, stars, content));
+                }
+                if(!list.isEmpty()){
+                    Intent intent=new Intent(MainActivity.this, ReviewListActivity.class);
+                    intent.putExtra("list",list);
+                    intent.putExtra("length",Integer.toString(jsonArray.length()));
+                    startActivity(intent);
+                }else{
+                    Toast.makeText(MainActivity.this, "리뷰가 존재하지 않습니다.",Toast.LENGTH_SHORT).show();
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+            //http 요청 응답 코드 확인 실시
+            responseCode = conn.getResponseCode();
+            System.out.println("http 응답 코드 : " + responseCode);
+            System.out.println("http 응답 데이터 : " + returnData);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            //http 요청 및 응답 완료 후 BufferedReader를 닫아줍니다
+            try {
+                if (br != null) {
+                    br.close();
+                }
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
 
 
     private void listview(int length, ArrayList<MenuItem> menulist){

@@ -1,6 +1,8 @@
 package com.example.Moonkey_store;
 
-public class ReviewItem {
+import java.io.Serializable;
+
+public class ReviewItem implements Serializable {
 
     private String nickname;
     private String score;
