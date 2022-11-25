@@ -52,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
     private LinearLayout review, orderlist, standing, question, editAccnt;
     private TextView nick;
     private String id, uid, phone, addr, nickname, storeId, strname, straddr, category, contact;
-    private int length;
+    private String length, token;
 
 
     private ArrayList<AccountItem> acclist;
@@ -65,7 +65,18 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.fragment_home);
 
         Intent intent = getIntent();
-        String token=intent.getStringExtra("token");
+        token=intent.getStringExtra("token");
+
+
+        store_name=findViewById(R.id.tv_address);
+        mypage=findViewById(R.id.mypage);
+        searchMenu=findViewById(R.id.searchmenu);
+        searchbtn=findViewById(R.id.searchbtn);
+        btn_add=findViewById(R.id.imageView2);
+        listView=findViewById(R.id.listView);
+        nestedScrollView=findViewById(R.id.nested_scroll_view);
+        nick = findViewById(R.id.id_txt);
+
 
 
         if(intent.hasExtra("acclist")){
@@ -90,20 +101,11 @@ public class MainActivity extends AppCompatActivity {
             }
         }
         if(intent.hasExtra("menulength")&&intent.hasExtra("menulist")){
-            length = Integer.parseInt(intent.getStringExtra("menulength"));
+            length = intent.getStringExtra("menulength");
             menulist = (ArrayList<MenuItem>) intent.getSerializableExtra("menulist");
             listview(storeId, length,menulist);
         }
 
-
-        store_name=findViewById(R.id.tv_address);
-        mypage=findViewById(R.id.mypage);
-        searchMenu=findViewById(R.id.searchmenu);
-        searchbtn=findViewById(R.id.searchbtn);
-        btn_add=findViewById(R.id.imageView2);
-        listView=findViewById(R.id.listView);
-        nestedScrollView=findViewById(R.id.nested_scroll_view);
-        nick = findViewById(R.id.id_txt);
 
 
         //마이페이지(가게)
@@ -130,6 +132,11 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent=new Intent(getApplicationContext(),AddMenuActivity.class);
                 intent.putExtra("storeId",storeId);
+                intent.putExtra("menulength", length);
+                intent.putExtra("acclist", acclist);
+                intent.putExtra("storelist", strlist);
+                intent.putExtra("menulist", menulist);
+                intent.putExtra("token", token);
                 startActivity(intent);
             }
         });
@@ -370,17 +377,18 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-    private void listview(String storeId, int length, ArrayList<MenuItem> menulist){
+    private void listview(String storeId, String length, ArrayList<MenuItem> menulist){
         //리스트뷰
         listView=findViewById(R.id.listView);
         adapter=new MenuAdapter(items);
-        for (int i = 0; i < length ;i++) {
+
+        int length2 = Integer.parseInt(length);
+        for (int i = 0; i < length2 ;i++) {
             items.add(new MenuItem(menulist.get(i).getMenuId(), menulist.get(i).getPrice(), menulist.get(i).getMenuName(),
                     menulist.get(i).getOptions(), menulist.get(i).getDescript()));
         }
-//        items.add(new Menu(10000,"떡볶이","밀떡으로 만들었어용"));
-//        items.add(new Menu(21000,"로제떡볶이","쌀떡으로 만들었어용"));
         listView.setAdapter(adapter);
+        adapter.notifyDataSetChanged();
 
         //
         nestedScrollView=findViewById(R.id.nested_scroll_view);
@@ -400,7 +408,14 @@ public class MainActivity extends AppCompatActivity {
                 intent.putExtra("price",item.getPrice());
                 intent.putExtra("name",item.getMenuName());
                 intent.putExtra("comment",item.getDescript());
+                intent.putExtra("options",item.getOptions());
                 intent.putExtra("storeId",storeId);
+
+                intent.putExtra("menulength", length);
+                intent.putExtra("acclist", acclist);
+                intent.putExtra("storelist", strlist);
+                intent.putExtra("menulist", menulist);
+                intent.putExtra("token", token);
                 startActivity(intent);
 
             }

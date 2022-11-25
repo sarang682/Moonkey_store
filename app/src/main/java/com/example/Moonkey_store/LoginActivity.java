@@ -143,62 +143,61 @@ public class LoginActivity extends AppCompatActivity {
             System.out.println("http 요청 데이터 : " + data);
             System.out.println("");
 
-            //http 요청 후 응답 받은 데이터를 버퍼에 쌓는다
-            br = new BufferedReader(new InputStreamReader(conn.getInputStream(), "UTF-8"));
-            sb = new StringBuffer();
-            while ((responseData = br.readLine()) != null) {
-                sb.append(responseData); //StringBuffer에 응답받은 데이터 순차적으로 저장 실시
-            }
-
-            //메소드 호출 완료 시 반환하는 변수에 버퍼 데이터 삽입 실시
-            returnData = sb.toString();
-
             //http 요청 응답 코드 확인 실시
 //            String responseCode = String.valueOf(conn.getResponseCode());
             responseCode = conn.getResponseCode();
             System.out.println("http 응답 코드 : " + responseCode);
             System.out.println("http 응답 데이터 : " + returnData);
 
-            //returnData를 json형식으로
-            ArrayList<AccountItem> list = new ArrayList<AccountItem>();
-            String uiD="";
-            String flag="";
-            String token = "";
+            if (responseCode == 200) {
+                //http 요청 후 응답 받은 데이터를 버퍼에 쌓는다
+                br = new BufferedReader(new InputStreamReader(conn.getInputStream(), "UTF-8"));
+                sb = new StringBuffer();
+                while ((responseData = br.readLine()) != null) {
+                    sb.append(responseData); //StringBuffer에 응답받은 데이터 순차적으로 저장 실시
+                }
 
-            try {
-                JSONObject jsonObject = new JSONObject(returnData);
-                JSONObject accountJson = jsonObject.getJSONObject("accountDto");
+                //메소드 호출 완료 시 반환하는 변수에 버퍼 데이터 삽입 실시
+                returnData = sb.toString();
 
-                for (int i = 0; i < accountJson.length(); i++) {
-                    String iD = accountJson.getString("id");
-                    uiD = accountJson.getString("uid");
-                    String phone = accountJson.getString("phone");
-                    String nickname = accountJson.getString("nickname");
-                    String addr = accountJson.getString("addr");
-                    flag = accountJson.getString("flag");
+
+                //returnData를 json형식으로
+                ArrayList<AccountItem> list = new ArrayList<AccountItem>();
+                String uiD="";
+                String flag="";
+                String token = "";
+
+                try {
+                    JSONObject jsonObject = new JSONObject(returnData);
+                    JSONObject accountJson = jsonObject.getJSONObject("accountDto");
+
+                    for (int i = 0; i < accountJson.length(); i++) {
+                        String iD = accountJson.getString("id");
+                        uiD = accountJson.getString("uid");
+                        String phone = accountJson.getString("phone");
+                        String nickname = accountJson.getString("nickname");
+                        String addr = accountJson.getString("addr");
+                        flag = accountJson.getString("flag");
 
 //                    System.out.println("id:" + iD + "phone: " + phone +
 //                            "nickname: " + nickname + "addr:" + addr + "\n");
 
-                    list.add(new AccountItem(iD, uiD, phone, addr, nickname));
+                        list.add(new AccountItem(iD, uiD, phone, addr, nickname));
+                    }
+                    token = jsonObject.getString("token");
+                    token = "Bearer " + token.trim();
+                    System.out.println("token: " + token);
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
                 }
-                token = jsonObject.getString("token");
-                token = "Bearer " + token.trim();
-                System.out.println("token: " + token);
 
-
-                if (responseCode == 200) {
 //                    if(flag.equals("1")){
-                        storeAccount(uiD,list,token);
+                storeAccount(uiD,list,token);
 //                    }
-                } else {
-                    Toast.makeText(LoginActivity.this, "로그인에 실패하였습니다.", Toast.LENGTH_SHORT).show();
-                }
-            } catch (JSONException e) {
-                e.printStackTrace();
+            } else {
+                Toast.makeText(LoginActivity.this, "로그인에 실패하였습니다.", Toast.LENGTH_SHORT).show();
             }
-
-
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -280,7 +279,7 @@ public class LoginActivity extends AppCompatActivity {
             //메소드 호출 완료 시 반환하는 변수에 버퍼 데이터 삽입 실시
             returnData = sb.toString();
 
-                        //returnData를 json형식으로
+            //returnData를 json형식으로
             ArrayList<StoreItem> storelist = new ArrayList<StoreItem>();
             String storeId="";
             try {
@@ -299,7 +298,7 @@ public class LoginActivity extends AppCompatActivity {
 
                     storelist.add(new StoreItem(storeId, name, address, category, contact));
                 }
-                    menulist(storeId,acclist,storelist,token);
+                menulist(storeId,acclist,storelist,token);
 
             } catch (JSONException e) {
                 e.printStackTrace();
@@ -426,12 +425,6 @@ public class LoginActivity extends AppCompatActivity {
                 e.printStackTrace();
             }
         }
-
-//                StoreItem item = (StoreItem) adapter.getItem(position);
-//                Intent intent=new Intent(StoreListActivity.this,  StoreDetailActivity.class);
-//                intent.putExtra("store_name",item.getName());
-//                startActivity(intent);
-
 
     }
 

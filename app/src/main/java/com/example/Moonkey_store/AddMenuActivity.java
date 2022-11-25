@@ -18,6 +18,10 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -25,15 +29,21 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.ArrayList;
 
 public class AddMenuActivity extends AppCompatActivity {
 
-    EditText tv_menu,tv_price,tv_explain;
-    EditText tv_option,tv_option_price;
+    EditText tv_menu, tv_price, tv_explain;
+    EditText tv_option, tv_option_price;
     Button btn_img, btn_add_option, btn_del_option, btn_add;
     Uri uri;
     Bitmap bitmap;
     TextView tv_img;
+    ArrayList<AccountItem> acclist;
+    ArrayList<StoreItem> storelist;
+    ArrayList<MenuItem> menulist;
+    String token, storeId, menulength;
+    String menuName, options, price, description;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,35 +51,40 @@ public class AddMenuActivity extends AppCompatActivity {
         setContentView(R.layout.activity_make_menu);
 
         Intent intent = getIntent();
-        String storeId = intent.getStringExtra("storeId");
+        token = intent.getStringExtra("token");
+        storeId = intent.getStringExtra("storeId");
+        acclist = (ArrayList<AccountItem>) intent.getSerializableExtra("acclist");
+        storelist = (ArrayList<StoreItem>) intent.getSerializableExtra("storelist");
+        menulength = intent.getStringExtra("menulength");
+        menulist = (ArrayList<MenuItem>) intent.getSerializableExtra("menulist");
 
-        tv_menu=findViewById(R.id.make_menu_name);
-        tv_price=findViewById(R.id.make_menu_cost);
-        tv_explain=findViewById(R.id.modify_menu_explan);
+        tv_menu = findViewById(R.id.make_menu_name);
+        tv_price = findViewById(R.id.make_menu_cost);
+        tv_explain = findViewById(R.id.modify_menu_explan);
 
-        tv_option=findViewById(R.id.newitemname);
-        tv_option_price=findViewById(R.id.newitemcost);
+        tv_option = findViewById(R.id.newitemname);
+        tv_option_price = findViewById(R.id.newitemcost);
 
-        btn_img=findViewById(R.id.attached_file_btn);
-        btn_add_option=findViewById(R.id.btnAdd);
-        btn_del_option=findViewById(R.id.btnDelete);
-        btn_add=findViewById(R.id.complete);
+        btn_img = findViewById(R.id.attached_file_btn);
+        btn_add_option = findViewById(R.id.btnAdd);
+        btn_del_option = findViewById(R.id.btnDelete);
+        btn_add = findViewById(R.id.complete);
 
-        tv_img=findViewById(R.id.attached_menu_picture);
+        tv_img = findViewById(R.id.attached_menu_picture);
         //상품등록
         btn_add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                String menuName=tv_menu.getText().toString();
-                String options=tv_option.getText().toString();
-                String price=tv_price.getText().toString();
-                String description=tv_explain.getText().toString();
+                 menuName = tv_menu.getText().toString();
+                 options = tv_option.getText().toString();
+                 price = tv_price.getText().toString();
+                 description = tv_explain.getText().toString();
 
-                if(isNull(tv_menu)||isNull(tv_price)){
+                if (isNull(tv_menu) || isNull(tv_price)) {
                     Toast.makeText(getApplicationContext(), "빈칸을 확인해 주세요.", Toast.LENGTH_SHORT).show();
-                }else{
-                    addMenu(storeId, menuName, options, price, description);
+                } else {
+                    addMenu();
                 }
             }
         });
@@ -78,7 +93,7 @@ public class AddMenuActivity extends AppCompatActivity {
         btn_img.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent=new Intent(Intent.ACTION_PICK);
+                Intent intent = new Intent(Intent.ACTION_PICK);
                 intent.setType("image/*");
                 startActivityResult.launch(intent);
             }
@@ -86,19 +101,19 @@ public class AddMenuActivity extends AppCompatActivity {
     }
 
     //사진선택
-    ActivityResultLauncher<Intent> startActivityResult=registerForActivityResult(
+    ActivityResultLauncher<Intent> startActivityResult = registerForActivityResult(
             new ActivityResultContracts.StartActivityForResult(),
             new ActivityResultCallback<ActivityResult>() {
                 @Override
                 public void onActivityResult(ActivityResult result) {
-                    if(result.getResultCode()==RESULT_OK&&result.getData()!=null){
-                        uri=result.getData().getData();
+                    if (result.getResultCode() == RESULT_OK && result.getData() != null) {
+                        uri = result.getData().getData();
                         tv_img.setText(uri.toString());
-                        try{
-                            bitmap= MediaStore.Images.Media.getBitmap(getContentResolver(),uri);
-                        }catch (FileNotFoundException e){
+                        try {
+                            bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), uri);
+                        } catch (FileNotFoundException e) {
                             e.printStackTrace();
-                        }catch (IOException e){
+                        } catch (IOException e) {
                             e.printStackTrace();
                         }
                     }
@@ -113,7 +128,7 @@ public class AddMenuActivity extends AppCompatActivity {
         else return false;
     }
 
-    private void addMenu(String storeId, String menuName, String options, String price, String description) {
+    private void addMenu() {
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
 
@@ -134,9 +149,9 @@ public class AddMenuActivity extends AppCompatActivity {
 
         //메소드 호출 결과값을 반환하기 위한 변수
         String returnData = "";
-        int responseCode=0;
+        int responseCode = 0;
 
-        String data="{ \"menuName\" : \"" +menuName+ "\", \"options\" :\""+options+"\" ,\"price\" : \""+price+"\", \"description\" : \""+description+"\"}";
+        String data = "{ \"menuName\" : \"" + menuName + "\", \"options\" :\"" + options + "\" ,\"price\" : \"" + price + "\", \"description\" : \"" + description + "\"}";
 
 
         try {
@@ -150,21 +165,20 @@ public class AddMenuActivity extends AppCompatActivity {
             conn.setRequestProperty("Content-Type", "application/json; utf-8"); //post body json으로 던지기 위함
             conn.setRequestProperty("Accept", "application/json");
             conn.setDoOutput(true); //OutputStream을 사용해서 post body 데이터 전송
-            try (OutputStream os = conn.getOutputStream()){
+            try (OutputStream os = conn.getOutputStream()) {
                 byte request_data[] = data.getBytes("utf-8");
                 os.write(request_data);
                 os.close();
-            }
-            catch(Exception e) {
+            } catch (Exception e) {
                 e.printStackTrace();
             }
 
             //http 요청 실시
             conn.connect();
-            System.out.println("http 요청 방식 : "+"POST BODY JSON");
-            System.out.println("http 요청 타입 : "+"application/json");
-            System.out.println("http 요청 주소 : "+UrlData);
-            System.out.println("http 요청 데이터 : "+data);
+            System.out.println("http 요청 방식 : " + "POST BODY JSON");
+            System.out.println("http 요청 타입 : " + "application/json");
+            System.out.println("http 요청 주소 : " + UrlData);
+            System.out.println("http 요청 데이터 : " + data);
             System.out.println("");
 
             //http 요청 후 응답 받은 데이터를 버퍼에 쌓는다
@@ -180,18 +194,17 @@ public class AddMenuActivity extends AppCompatActivity {
             //http 요청 응답 코드 확인 실시
 //            String responseCode = String.valueOf(conn.getResponseCode());
             responseCode = conn.getResponseCode();
-            System.out.println("http 응답 코드 : "+responseCode);
-            System.out.println("http 응답 데이터 : "+returnData);
+            System.out.println("http 응답 코드 : " + responseCode);
+            System.out.println("http 응답 데이터 : " + returnData);
 
         } catch (IOException e) {
             e.printStackTrace();
         } finally {
-            if(responseCode==200){
-                Toast.makeText (AddMenuActivity.this, "상품 등록에 성공하였습니다.", Toast.LENGTH_SHORT).show();
-//                Intent intent = new Intent(AddMenuActivity.this, MainActivity.class);
-//                startActivity(intent);
-            }else{
-                Toast.makeText (AddMenuActivity.this, "상품 등록에 실패하였습니다.", Toast.LENGTH_SHORT).show();
+            if (responseCode == 200) {
+                menulist();
+                Toast.makeText(AddMenuActivity.this, "상품 등록에 성공하였습니다.", Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(AddMenuActivity.this, "상품 등록에 실패하였습니다.", Toast.LENGTH_SHORT).show();
             }
             //http 요청 및 응답 완료 후 BufferedReader를 닫아줍니다
             try {
@@ -203,4 +216,112 @@ public class AddMenuActivity extends AppCompatActivity {
             }
         }
     }
+
+    private void menulist() {
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+        StrictMode.setThreadPolicy(policy);
+
+//        StoreItem item = (StoreItem) adapter.getItem(position);
+
+        //http 요청 시 url 주소와 파라미터 데이터를 결합하기 위한 변수 선언
+        //http 요청 시 필요한 url 주소를 변수 선언
+        String totalUrl = "";
+        String UrlData = "http://165.229.86.152:8293/app/store/" + storeId + "/menu/list"; //스토어아이디 메뉴리스트
+
+        totalUrl = UrlData.trim().toString();
+
+        int responseCode = 0;
+
+        //http 통신을 하기위한 객체 선언 실시
+        URL url = null;
+        HttpURLConnection conn = null;
+
+        //http 통신 요청 후 응답 받은 데이터를 담기 위한 변수
+        String responseData = "";
+        BufferedReader br = null;
+        StringBuffer sb = null;
+
+        //메소드 호출 결과값을 반환하기 위한 변수
+        String returnData = "";
+
+        try {
+            //파라미터로 들어온 url을 사용해 connection 실시
+            url = new URL(totalUrl);
+            conn = (HttpURLConnection) url.openConnection();
+
+            //http 요청에 필요한 타입 정의 실시
+            conn.setRequestProperty("Accept", "application/json");
+            conn.setRequestMethod("GET");
+
+            //http 요청 실시
+            conn.connect();
+            System.out.println("http 요청 방식 : " + "GET");
+            System.out.println("http 요청 타입 : " + "application/json");
+            System.out.println("http 요청 주소 : " + UrlData);
+            System.out.println("");
+
+            //http 요청 후 응답 받은 데이터를 버퍼에 쌓는다
+            br = new BufferedReader(new InputStreamReader(conn.getInputStream(), "UTF-8"));
+            sb = new StringBuffer();
+            while ((responseData = br.readLine()) != null) {
+                sb.append(responseData); //StringBuffer에 응답받은 데이터 순차적으로 저장 실시
+            }
+
+            //메소드 호출 완료 시 반환하는 변수에 버퍼 데이터 삽입 실시
+            returnData = sb.toString();
+
+            //returnData를 json형식으로
+            ArrayList<MenuItem> list = new ArrayList<MenuItem>();
+
+            try {
+                JSONArray jsonArray = new JSONArray(returnData);
+
+                for (int i = 0; i < jsonArray.length(); i++) {
+                    JSONObject JsonObject = jsonArray.getJSONObject(i);
+                    String menuId = JsonObject.getString("menuId");
+                    String price = JsonObject.getString("price");
+                    String menuName = JsonObject.getString("menuName");
+                    String options = JsonObject.getString("options");
+                    String description = JsonObject.getString("description");
+
+//                    System.out.println("menuId: " + menuId +
+//                            "menuName: " + menuName + "\n");
+
+                    list.add(new MenuItem(menuId, price, menuName, options, description));
+                }
+
+//                System.out.println("main에서 출력 : " + list.get(0).getMenuName());
+                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                intent.putExtra("menulength", Integer.toString(jsonArray.length()));
+                intent.putExtra("acclist", acclist);
+                intent.putExtra("storelist", storelist);
+                intent.putExtra("menulist", list);
+                intent.putExtra("token", token);
+                startActivity(intent);
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+            //http 요청 응답 코드 확인 실시
+            responseCode = conn.getResponseCode();
+            System.out.println("http 응답 코드 : " + responseCode);
+            System.out.println("http 응답 데이터 : " + returnData);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            //http 요청 및 응답 완료 후 BufferedReader를 닫아줍니다
+            try {
+                if (br != null) {
+                    br.close();
+                }
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+    }
+
 }

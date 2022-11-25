@@ -32,7 +32,12 @@ public class MenuDetailActivity extends AppCompatActivity {
     private ImageView Image;
     private EditText Name, Price, Comment, OptName, OptPrice;
     private Button File, OptAdd, OptDelete, Delete, Complete;
-    private String price, name, comment, storeId;
+    private String price, name, comment, options, storeId;
+    private ArrayList<AccountItem> acclist;
+    private ArrayList<StoreItem> storelist;
+    private ArrayList<MenuItem> menulist;
+    private String token, menulength;
+    private String nametxt, pricetxt, commenttxt,optnametxt, optprictxt;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,7 +48,17 @@ public class MenuDetailActivity extends AppCompatActivity {
         price = getIntent().getStringExtra("price");
         name = getIntent().getStringExtra("name");
         comment = getIntent().getStringExtra("comment");
-        storeId = getIntent().getStringExtra("storeId");
+        options = getIntent().getStringExtra("options");
+//        storeId = getIntent().getStringExtra("storeId");
+
+        Intent intent = getIntent();
+        token=intent.getStringExtra("token");
+        storeId = intent.getStringExtra("storeId");
+        acclist = (ArrayList<AccountItem>) intent.getSerializableExtra("acclist");
+        storelist = (ArrayList<StoreItem>) intent.getSerializableExtra("storelist");
+        menulength = intent.getStringExtra("menulength");
+        menulist = (ArrayList<MenuItem>) intent.getSerializableExtra("menulist");
+
 
         Name = findViewById(R.id.modify_menu_name);
         Price = findViewById(R.id.modify_menu_cost);
@@ -60,6 +75,7 @@ public class MenuDetailActivity extends AppCompatActivity {
         Price.setText(price);
         Name.setText(name);
         Comment.setText(comment);
+        OptName.setText(options);
 
 
         File.setOnClickListener(new View.OnClickListener() {
@@ -91,9 +107,8 @@ public class MenuDetailActivity extends AppCompatActivity {
                 builder.setPositiveButton("예", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        getmenuId(storeId, name);
-//                        deleteMenu(name);
-                        Toast.makeText(MenuDetailActivity.this, "삭제되었습니다.", Toast.LENGTH_SHORT).show();
+                        deleteMenu(getmenuId());
+//                        Toast.makeText(MenuDetailActivity.this, "삭제되었습니다.", Toast.LENGTH_SHORT).show();
                     }
                 });
                 builder.setNeutralButton("아니오", null);
@@ -105,12 +120,17 @@ public class MenuDetailActivity extends AppCompatActivity {
         Complete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getApplicationContext(), "수정되었습니다.", Toast.LENGTH_SHORT).show();
+                nametxt= Name.getText().toString();
+                pricetxt = Price.getText().toString();
+                commenttxt = Comment.getText().toString();
+                optnametxt = OptName.getText().toString();
+
+                editMenu(getmenuId());
             }
         });
     }
 
-    private void getmenuId(String storeId, String menuname) {
+    private String getmenuId() {
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
 
@@ -118,6 +138,270 @@ public class MenuDetailActivity extends AppCompatActivity {
         //http 요청 시 필요한 url 주소를 변수 선언
         String totalUrl = "";
         String UrlData = "http://165.229.86.152:8293/app/store/"+storeId+"/menu/list"; // 가게별 리뷰리스트
+        totalUrl = UrlData.trim().toString();
+
+        int responseCode = 0;
+
+        //http 통신을 하기위한 객체 선언 실시
+        URL url = null;
+        HttpURLConnection conn = null;
+
+        //http 통신 요청 후 응답 받은 데이터를 담기 위한 변수
+        String responseData = "";
+        BufferedReader br = null;
+        StringBuffer sb = null;
+
+        //메소드 호출 결과값을 반환하기 위한 변수
+        String returnData = "";
+        String ID="";
+
+        try {
+            //파라미터로 들어온 url을 사용해 connection 실시
+            url = new URL(totalUrl);
+            conn = (HttpURLConnection) url.openConnection();
+
+            //http 요청에 필요한 타입 정의 실시
+            conn.setRequestProperty("Accept", "application/json");
+            conn.setRequestMethod("GET");
+
+            //http 요청 실시
+            conn.connect();
+            System.out.println("http 요청 방식 : " + "GET");
+            System.out.println("http 요청 타입 : " + "application/json");
+            System.out.println("http 요청 주소 : " + UrlData);
+            System.out.println("");
+
+            //http 요청 후 응답 받은 데이터를 버퍼에 쌓는다
+            br = new BufferedReader(new InputStreamReader(conn.getInputStream(), "UTF-8"));
+            sb = new StringBuffer();
+            while ((responseData = br.readLine()) != null) {
+                sb.append(responseData); //StringBuffer에 응답받은 데이터 순차적으로 저장 실시
+            }
+
+            //메소드 호출 완료 시 반환하는 변수에 버퍼 데이터 삽입 실시
+            returnData = sb.toString();
+
+            //returnData를 json형식으로
+//            ArrayList list = new ArrayList();
+
+            try {
+                JSONArray jsonArray = new JSONArray(returnData);
+
+                for (int i = 0; i < jsonArray.length(); i++) {
+                    JSONObject JsonObject = jsonArray.getJSONObject(i);
+                    String menuId = JsonObject.getString("menuId");
+                    String menuName = JsonObject.getString("menuName");
+
+                    if(menuName.equals(name)){
+                        ID = menuId;
+                    }
+                }
+//                if(!ID.equals("")){
+//                    deleteMenu(ID);
+//                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+            //http 요청 응답 코드 확인 실시
+            responseCode = conn.getResponseCode();
+            System.out.println("http 응답 코드 : " + responseCode);
+            System.out.println("http 응답 데이터 : " + returnData);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            //http 요청 및 응답 완료 후 BufferedReader를 닫아줍니다
+            try {
+                if (br != null) {
+                    br.close();
+                }
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        return ID;
+    }
+
+    private void deleteMenu(String menuId) {
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+        StrictMode.setThreadPolicy(policy);
+
+        //http 요청 시 필요한 url 주소를 변수 선언
+        String totalUrl = "";
+        String UrlData = "http://165.229.86.152:8293/app/store/"+storeId+"/menu/unreg/"+menuId+"";
+        totalUrl = UrlData.trim().toString();
+
+        //http 통신을 하기위한 객체 선언 실시
+        URL url = null;
+        HttpURLConnection conn = null;
+
+        //http 통신 요청 후 응답 받은 데이터를 담기 위한 변수
+        String responseData = "";
+        BufferedReader br = null;
+        StringBuffer sb = null;
+
+        //메소드 호출 결과값을 반환하기 위한 변수
+        String returnData = "";
+        int responseCode=0;
+
+
+        try {
+            //파라미터로 들어온 url을 사용해 connection 실시
+            url = new URL(totalUrl);
+            conn = (HttpURLConnection) url.openConnection();
+
+            //http 요청에 필요한 타입 정의 실시
+            conn.setRequestMethod("POST");
+//            conn.setRequestProperty("Content-Type", "application/json"); //post body json으로 던지기 위함
+            conn.setRequestProperty("Content-Type", "application/json; utf-8"); //post body json으로 던지기 위함
+            conn.setRequestProperty("Accept", "application/json");
+            conn.setDoOutput(true); //OutputStream을 사용해서 post body 데이터 전송;
+
+            //http 요청 실시
+            conn.connect();
+            System.out.println("http 요청 방식 : "+"POST BODY JSON");
+            System.out.println("http 요청 타입 : "+"application/json");
+            System.out.println("http 요청 주소 : "+UrlData);
+//            System.out.println("http 요청 데이터 : "+data);
+            System.out.println("");
+
+            //http 요청 후 응답 받은 데이터를 버퍼에 쌓는다
+            br = new BufferedReader(new InputStreamReader(conn.getInputStream(), "UTF-8"));
+            sb = new StringBuffer();
+            while ((responseData = br.readLine()) != null) {
+                sb.append(responseData); //StringBuffer에 응답받은 데이터 순차적으로 저장 실시
+            }
+
+            //메소드 호출 완료 시 반환하는 변수에 버퍼 데이터 삽입 실시
+            returnData = sb.toString();
+
+            //http 요청 응답 코드 확인 실시
+//            String responseCode = String.valueOf(conn.getResponseCode());
+            responseCode = conn.getResponseCode();
+            System.out.println("http 응답 코드 : "+responseCode);
+            System.out.println("http 응답 데이터 : "+returnData);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            if (responseCode == 200) {
+                menulist();
+                Toast.makeText(MenuDetailActivity.this, "삭제되었습니다.", Toast.LENGTH_SHORT).show();
+            }
+            //http 요청 및 응답 완료 후 BufferedReader를 닫아줍니다
+            try {
+                if (br != null) {
+                    br.close();
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    private void editMenu(String menuId){
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+        StrictMode.setThreadPolicy(policy);
+
+        //http 요청 시 필요한 url 주소를 변수 선언
+        String totalUrl = "";
+        String UrlData = "http://165.229.86.152:8293/app/store/"+storeId+"/menu/reg";
+        totalUrl = UrlData.trim().toString();
+
+        //http 통신을 하기위한 객체 선언 실시
+        URL url = null;
+        HttpURLConnection conn = null;
+
+        //http 통신 요청 후 응답 받은 데이터를 담기 위한 변수
+        String responseData = "";
+        BufferedReader br = null;
+        StringBuffer sb = null;
+
+        //메소드 호출 결과값을 반환하기 위한 변수
+        String returnData = "";
+        int responseCode=0;
+
+        String data="{ \"menuId\" : \"" +menuId+ "\", \"menuName\" :\""+nametxt+"\" ,\"price\" : \""+pricetxt+"\", \"options\" : \""+optnametxt+"\", \"description\" : \""+commenttxt+"\"}";
+
+        try {
+            //파라미터로 들어온 url을 사용해 connection 실시
+            url = new URL(totalUrl);
+            conn = (HttpURLConnection) url.openConnection();
+
+            //http 요청에 필요한 타입 정의 실시
+            conn.setRequestMethod("POST");
+//            conn.setRequestProperty("Content-Type", "application/json"); //post body json으로 던지기 위함
+            conn.setRequestProperty("Content-Type", "application/json; utf-8"); //post body json으로 던지기 위함
+            conn.setRequestProperty("Accept", "application/json");
+            conn.setDoOutput(true); //OutputStream을 사용해서 post body 데이터 전송
+            try (OutputStream os = conn.getOutputStream()){
+                byte request_data[] = data.getBytes("utf-8");
+                os.write(request_data);
+                os.close();
+            }
+            catch(Exception e) {
+                e.printStackTrace();
+            }
+
+            //http 요청 실시
+            conn.connect();
+            System.out.println("http 요청 방식 : "+"POST BODY JSON");
+            System.out.println("http 요청 타입 : "+"application/json");
+            System.out.println("http 요청 주소 : "+UrlData);
+            System.out.println("http 요청 데이터 : "+data);
+            System.out.println("");
+
+            //http 요청 후 응답 받은 데이터를 버퍼에 쌓는다
+            br = new BufferedReader(new InputStreamReader(conn.getInputStream(), "UTF-8"));
+            sb = new StringBuffer();
+            while ((responseData = br.readLine()) != null) {
+                sb.append(responseData); //StringBuffer에 응답받은 데이터 순차적으로 저장 실시
+            }
+
+            //메소드 호출 완료 시 반환하는 변수에 버퍼 데이터 삽입 실시
+            returnData = sb.toString();
+
+            //http 요청 응답 코드 확인 실시
+//            String responseCode = String.valueOf(conn.getResponseCode());
+            responseCode = conn.getResponseCode();
+            System.out.println("http 응답 코드 : "+responseCode);
+            System.out.println("http 응답 데이터 : "+returnData);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            if(responseCode==200){
+                menulist();
+                Toast.makeText(getApplicationContext(), "수정되었습니다.", Toast.LENGTH_SHORT).show();
+            }else{
+                Toast.makeText (getApplicationContext(), "수정에 실패하였습니다.", Toast.LENGTH_SHORT).show();
+            }
+            //http 요청 및 응답 완료 후 BufferedReader를 닫아줍니다
+            try {
+                if (br != null) {
+                    br.close();
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+
+
+    private void menulist() {
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+        StrictMode.setThreadPolicy(policy);
+
+//        StoreItem item = (StoreItem) adapter.getItem(position);
+
+        //http 요청 시 url 주소와 파라미터 데이터를 결합하기 위한 변수 선언
+        //http 요청 시 필요한 url 주소를 변수 선언
+        String totalUrl = "";
+        String UrlData = "http://165.229.86.152:8293/app/store/" + storeId + "/menu/list"; //스토어아이디 메뉴리스트
+
         totalUrl = UrlData.trim().toString();
 
         int responseCode = 0;
@@ -161,8 +445,7 @@ public class MenuDetailActivity extends AppCompatActivity {
             returnData = sb.toString();
 
             //returnData를 json형식으로
-//            ArrayList list = new ArrayList();
-            String ID="";
+            ArrayList<MenuItem> list = new ArrayList<MenuItem>();
 
             try {
                 JSONArray jsonArray = new JSONArray(returnData);
@@ -170,16 +453,26 @@ public class MenuDetailActivity extends AppCompatActivity {
                 for (int i = 0; i < jsonArray.length(); i++) {
                     JSONObject JsonObject = jsonArray.getJSONObject(i);
                     String menuId = JsonObject.getString("menuId");
+                    String price = JsonObject.getString("price");
                     String menuName = JsonObject.getString("menuName");
+                    String options = JsonObject.getString("options");
+                    String description = JsonObject.getString("description");
 
-                    if(menuName.equals(menuname)){
-//                        list.add(menuId);
-                        ID = menuId;
-                    }
+//                    System.out.println("menuId: " + menuId +
+//                            "menuName: " + menuName + "\n");
+
+                    list.add(new MenuItem(menuId, price, menuName, options, description));
                 }
-                if(!ID.equals("")){
-                    deleteMenu(storeId, ID);
-                }
+
+//                System.out.println("main에서 출력 : " + list.get(0).getMenuName());
+                Intent intent = new Intent(MenuDetailActivity.this, MainActivity.class);
+                intent.putExtra("menulength", Integer.toString(jsonArray.length()));
+                intent.putExtra("acclist", acclist);
+                intent.putExtra("storelist", storelist);
+                intent.putExtra("menulist", list);
+                intent.putExtra("token", token);
+                startActivity(intent);
+
             } catch (JSONException e) {
                 e.printStackTrace();
             }
@@ -198,94 +491,6 @@ public class MenuDetailActivity extends AppCompatActivity {
                     br.close();
                 }
 
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-    }
-
-    private void deleteMenu(String storeId, String menuId) {
-        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
-        StrictMode.setThreadPolicy(policy);
-
-        //http 요청 시 필요한 url 주소를 변수 선언
-        String totalUrl = "";
-        String UrlData = "http://165.229.86.152:8293/app/store/"+storeId+"/menu/unreg/"+menuId+"";
-        totalUrl = UrlData.trim().toString();
-
-        //http 통신을 하기위한 객체 선언 실시
-        URL url = null;
-        HttpURLConnection conn = null;
-
-        //http 통신 요청 후 응답 받은 데이터를 담기 위한 변수
-        String responseData = "";
-        BufferedReader br = null;
-        StringBuffer sb = null;
-
-        //메소드 호출 결과값을 반환하기 위한 변수
-        String returnData = "";
-        int responseCode=0;
-
-//        String data="{ \"id\" : \"" +id+ "\", \"password\" :\""+password+"\" ,\"phone\" : \""+phone+"\", \"addr\" : \""+addr+"\", \"nickname\" : \""+nickname+"\" , \"flag\" : 1 }";
-
-
-        try {
-            //파라미터로 들어온 url을 사용해 connection 실시
-            url = new URL(totalUrl);
-            conn = (HttpURLConnection) url.openConnection();
-
-            //http 요청에 필요한 타입 정의 실시
-            conn.setRequestMethod("POST");
-//            conn.setRequestProperty("Content-Type", "application/json"); //post body json으로 던지기 위함
-            conn.setRequestProperty("Content-Type", "application/json; utf-8"); //post body json으로 던지기 위함
-            conn.setRequestProperty("Accept", "application/json");
-            conn.setDoOutput(true); //OutputStream을 사용해서 post body 데이터 전송
-//            try (OutputStream os = conn.getOutputStream()){
-//                byte request_data[] = data.getBytes("utf-8");
-//                os.write(request_data);
-//                os.close();
-//            }
-//            catch(Exception e) {
-//                e.printStackTrace();
-//            }
-
-            //http 요청 실시
-            conn.connect();
-            System.out.println("http 요청 방식 : "+"POST BODY JSON");
-            System.out.println("http 요청 타입 : "+"application/json");
-            System.out.println("http 요청 주소 : "+UrlData);
-//            System.out.println("http 요청 데이터 : "+data);
-            System.out.println("");
-
-            //http 요청 후 응답 받은 데이터를 버퍼에 쌓는다
-            br = new BufferedReader(new InputStreamReader(conn.getInputStream(), "UTF-8"));
-            sb = new StringBuffer();
-            while ((responseData = br.readLine()) != null) {
-                sb.append(responseData); //StringBuffer에 응답받은 데이터 순차적으로 저장 실시
-            }
-
-            //메소드 호출 완료 시 반환하는 변수에 버퍼 데이터 삽입 실시
-            returnData = sb.toString();
-
-            //http 요청 응답 코드 확인 실시
-//            String responseCode = String.valueOf(conn.getResponseCode());
-            responseCode = conn.getResponseCode();
-            System.out.println("http 응답 코드 : "+responseCode);
-            System.out.println("http 응답 데이터 : "+returnData);
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            if(responseCode==200){
-                Toast.makeText (MenuDetailActivity.this, "상품 삭제에 성공공하였습니다.", Toast.LENGTH_SHORT).show();
-            }else{
-                Toast.makeText (MenuDetailActivity.this, "상품 삭제에 실패하였습니다.", Toast.LENGTH_SHORT).show();
-            }
-            //http 요청 및 응답 완료 후 BufferedReader를 닫아줍니다
-            try {
-                if (br != null) {
-                    br.close();
-                }
             } catch (IOException e) {
                 e.printStackTrace();
             }
