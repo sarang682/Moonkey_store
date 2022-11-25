@@ -1,14 +1,19 @@
 package com.example.Moonkey_store;
 
-public class OrderItem {
+import java.io.Serializable;
+
+public class OrderItem implements Serializable {
     private int num;
     private String address;
-    private int price;
+    private int amount;
 
-    public OrderItem(int num, String address, int price) {
-        this.num = num;
+    private String product;
+
+
+    public OrderItem(String product, String address, int amount) {
+        this.product = product;
         this.address = address;
-        this.price = price;
+        this.amount = amount;
     }
 
     public int getNum() {
@@ -27,11 +32,19 @@ public class OrderItem {
         this.address = address;
     }
 
-    public int getPrice() {
-        return price;
+    public String getProduct() {
+        return product;
     }
 
-    public void setPrice(int price) {
-        this.price = price;
+    public void setProduct(String product) {
+        this.product = product;
+    }
+
+    public int getAmount() {
+        return amount;
+    }
+
+    public void setAmount(int amount) {
+        this.amount = amount;
     }
 }

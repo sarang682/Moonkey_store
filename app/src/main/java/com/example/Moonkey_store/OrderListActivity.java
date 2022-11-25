@@ -22,13 +22,18 @@ public class OrderListActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragment_orderlist);
+
+        Intent intent = getIntent();
+        ArrayList<OrderItem> list = (ArrayList<OrderItem>)intent.getSerializableExtra("list");
+        int length = Integer.parseInt(intent.getStringExtra("length"));
+        String strname = intent.getStringExtra("strname");
+        String straddr = intent.getStringExtra("straddr");
+
         lView=findViewById(R.id.order_lv);
         adapter=new OrderListActivity.ItemAdapter(items);
-        items.add(new OrderItem(8,"대구광역시 수성구 초록동 나무아파트",1584600));
-        items.add(new OrderItem(10,"대구광역시 수성구 노랑동 나무아파트",874200));
-        items.add(new OrderItem(5,"대구광역시 수성구 파랑동 나무아파트",70000));
-        items.add(new OrderItem(7,"대구광역시 수성구 빨강동 나무아파트",1010200));
-
+        for(int i =0; i<length; i++){
+            items.add(new OrderItem(list.get(i).getProduct(),list.get(i).getAddress(),list.get(i).getAmount()));
+        }
         lView.setAdapter(adapter);
 
         lView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -36,12 +41,15 @@ public class OrderListActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 OrderItem item = (OrderItem) adapter.getItem(position);
                 Intent intent=new Intent(OrderListActivity.this, OrderDetailActivity.class);
+                intent.putExtra("address",item.getAddress());
+                intent.putExtra("amount",item.getAmount());
+
+                intent.putExtra("strname",strname);
+                intent.putExtra("straddr",straddr);
                 startActivity(intent);
 
             }
         });
-
-
     }
 
     class ItemAdapter extends BaseAdapter {
@@ -84,8 +92,8 @@ public class OrderListActivity extends AppCompatActivity {
             }
 
             OrderItem item = items.get(position);
-            view.setPrice(Integer.toString(item.getPrice()));
-            view.setNum(Integer.toString(item.getNum()));
+            view.setPrice(Integer.toString(item.getAmount()));
+            view.setProduct(item.getProduct());
             view.setAddress(item.getAddress());
 
 //            view.setOnClickListener(new View.OnClickListener() {

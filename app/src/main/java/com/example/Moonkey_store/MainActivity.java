@@ -202,7 +202,6 @@ public class MainActivity extends AppCompatActivity {
                     ReviewList(storeId);
                 }else{
                     Toast.makeText(getApplicationContext(), "리뷰가 존재하지 않습니다.", Toast.LENGTH_SHORT).show();
-
                 }
 
 //                Intent intent = new Intent(MainActivity.this, ReviewListActivity.class);
@@ -214,8 +213,12 @@ public class MainActivity extends AppCompatActivity {
         orderlist.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, OrderListActivity.class);
-                startActivity(intent);
+                if(!storeId.equals("null")){
+                    OrderList(storeId);
+                }else{
+                    Toast.makeText(getApplicationContext(), "접수내역이 존재하지 않습니다.", Toast.LENGTH_SHORT).show();
+                }//                Intent intent = new Intent(MainActivity.this, OrderListActivity.class);
+//                startActivity(intent);
             }
         });
 
@@ -277,6 +280,53 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+
+
+    private void listview(String storeId, String length, ArrayList<MenuItem> menulist){
+        //리스트뷰
+        listView=findViewById(R.id.listView);
+        adapter=new MenuAdapter(items);
+
+        int length2 = Integer.parseInt(length);
+        for (int i = 0; i < length2 ;i++) {
+            items.add(new MenuItem(menulist.get(i).getMenuId(), menulist.get(i).getPrice(), menulist.get(i).getMenuName(),
+                    menulist.get(i).getOptions(), menulist.get(i).getDescript()));
+        }
+        listView.setAdapter(adapter);
+        adapter.notifyDataSetChanged();
+
+        //
+        nestedScrollView=findViewById(R.id.nested_scroll_view);
+        listView.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                nestedScrollView.requestDisallowInterceptTouchEvent(true);
+                return false;
+            }
+        });
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                MenuItem item = (MenuItem) adapter.getItem(position);
+                Intent intent=new Intent(MainActivity.this, MenuDetailActivity.class);
+                intent.putExtra("price",item.getPrice());
+                intent.putExtra("name",item.getMenuName());
+                intent.putExtra("comment",item.getDescript());
+                intent.putExtra("options",item.getOptions());
+                intent.putExtra("storeId",storeId);
+
+                intent.putExtra("menulength", length);
+                intent.putExtra("acclist", acclist);
+                intent.putExtra("storelist", strlist);
+                intent.putExtra("menulist", menulist);
+                intent.putExtra("token", token);
+                startActivity(intent);
+
+            }
+        });
     }
 
     private void ReviewList(String strid){
@@ -375,52 +425,104 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    private void OrderList(String strid){
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+        StrictMode.setThreadPolicy(policy);
 
+        //http 요청 시 url 주소와 파라미터 데이터를 결합하기 위한 변수 선언
+        //http 요청 시 필요한 url 주소를 변수 선언
+        String totalUrl = "";
+        String UrlData = "http://165.229.86.152:8293/app/package/"+strid+"/list"; // 가게별 리뷰리스트
+        totalUrl = UrlData.trim().toString();
 
-    private void listview(String storeId, String length, ArrayList<MenuItem> menulist){
-        //리스트뷰
-        listView=findViewById(R.id.listView);
-        adapter=new MenuAdapter(items);
+        int responseCode = 0;
 
-        int length2 = Integer.parseInt(length);
-        for (int i = 0; i < length2 ;i++) {
-            items.add(new MenuItem(menulist.get(i).getMenuId(), menulist.get(i).getPrice(), menulist.get(i).getMenuName(),
-                    menulist.get(i).getOptions(), menulist.get(i).getDescript()));
+        //http 통신을 하기위한 객체 선언 실시
+        URL url = null;
+        HttpURLConnection conn = null;
+
+        //http 통신 요청 후 응답 받은 데이터를 담기 위한 변수
+        String responseData = "";
+        BufferedReader br = null;
+        StringBuffer sb = null;
+
+        //메소드 호출 결과값을 반환하기 위한 변수
+        String returnData = "";
+
+        try {
+            //파라미터로 들어온 url을 사용해 connection 실시
+            url = new URL(totalUrl);
+            conn = (HttpURLConnection) url.openConnection();
+
+            //http 요청에 필요한 타입 정의 실시
+            conn.setRequestProperty("Accept", "application/json");
+            conn.setRequestMethod("GET");
+
+            //http 요청 실시
+            conn.connect();
+            System.out.println("http 요청 방식 : " + "GET");
+            System.out.println("http 요청 타입 : " + "application/json");
+            System.out.println("http 요청 주소 : " + UrlData);
+            System.out.println("");
+
+            //http 요청 후 응답 받은 데이터를 버퍼에 쌓는다
+            br = new BufferedReader(new InputStreamReader(conn.getInputStream(), "UTF-8"));
+            sb = new StringBuffer();
+            while ((responseData = br.readLine()) != null) {
+                sb.append(responseData); //StringBuffer에 응답받은 데이터 순차적으로 저장 실시
+            }
+
+            //메소드 호출 완료 시 반환하는 변수에 버퍼 데이터 삽입 실시
+            returnData = sb.toString();
+
+            //returnData를 json형식으로
+            ArrayList<OrderItem> list = new ArrayList<OrderItem>();
+
+            try {
+                JSONArray jsonArray = new JSONArray(returnData);
+
+                for (int i = 0; i < jsonArray.length(); i++) {
+                    JSONObject JsonObject = jsonArray.getJSONObject(i);
+                    String product = JsonObject.getString("product");
+                    String address = JsonObject.getString("address");
+                    int amount = JsonObject.getInt("amount");
+
+                    list.add(new OrderItem(product, address, amount));
+                }
+                if(!list.isEmpty()){
+                    Intent intent=new Intent(MainActivity.this, OrderListActivity.class);
+                    intent.putExtra("list",list);
+                    intent.putExtra("length",Integer.toString(jsonArray.length()));
+                    intent.putExtra("strname",strname);
+                    intent.putExtra("straddr",straddr);
+                    startActivity(intent);
+                }else{
+                    Toast.makeText(MainActivity.this, "주문내역이 존재하지 않습니다.",Toast.LENGTH_SHORT).show();
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+            //http 요청 응답 코드 확인 실시
+            responseCode = conn.getResponseCode();
+            System.out.println("http 응답 코드 : " + responseCode);
+            System.out.println("http 응답 데이터 : " + returnData);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            //http 요청 및 응답 완료 후 BufferedReader를 닫아줍니다
+            try {
+                if (br != null) {
+                    br.close();
+                }
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
-        listView.setAdapter(adapter);
-        adapter.notifyDataSetChanged();
-
-        //
-        nestedScrollView=findViewById(R.id.nested_scroll_view);
-        listView.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View view, MotionEvent motionEvent) {
-                nestedScrollView.requestDisallowInterceptTouchEvent(true);
-                return false;
-            }
-        });
-
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                MenuItem item = (MenuItem) adapter.getItem(position);
-                Intent intent=new Intent(MainActivity.this, MenuDetailActivity.class);
-                intent.putExtra("price",item.getPrice());
-                intent.putExtra("name",item.getMenuName());
-                intent.putExtra("comment",item.getDescript());
-                intent.putExtra("options",item.getOptions());
-                intent.putExtra("storeId",storeId);
-
-                intent.putExtra("menulength", length);
-                intent.putExtra("acclist", acclist);
-                intent.putExtra("storelist", strlist);
-                intent.putExtra("menulist", menulist);
-                intent.putExtra("token", token);
-                startActivity(intent);
-
-            }
-        });
     }
+
 
 
 

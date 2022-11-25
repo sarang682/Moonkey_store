@@ -114,7 +114,7 @@
                 android:layout_weight="1000">
 
                 <TextView
-                    android:id="@+id/party_name_num"
+                    android:id="@+id/pname"
                     android:background="@drawable/modify_edit"
                     android:layout_width="wrap_content"
                     android:layout_height="35dp"
@@ -152,7 +152,7 @@
                 android:layout_weight="1000">
 
                 <TextView
-                    android:id="@+id/fin_party_arrive"
+                    android:id="@+id/address"
                     android:background="@drawable/modify_edit"
                     android:layout_width="wrap_content"
                     android:layout_height="35dp"

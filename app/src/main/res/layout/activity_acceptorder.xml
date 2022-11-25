@@ -114,7 +114,7 @@
                 android:layout_weight="1000">
 
                 <TextView
-                    android:id="@+id/party_name_num"
+                    android:id="@+id/name"
                     android:background="@drawable/modify_edit"
                     android:layout_width="wrap_content"
                     android:layout_height="35dp"
@@ -152,7 +152,7 @@
                 android:layout_weight="1000">
 
                 <TextView
-                    android:id="@+id/fin_party_arrive"
+                    android:id="@+id/address"
                     android:background="@drawable/modify_edit"
                     android:layout_width="wrap_content"
                     android:layout_height="35dp"
@@ -191,7 +191,7 @@
                 android:layout_weight="1000">
 
                 <TextView
-                    android:id="@+id/total"
+                    android:id="@+id/amount"
                     android:background="@drawable/modify_edit"
                     android:layout_width="wrap_content"
                     android:layout_height="35dp"
@@ -305,15 +305,15 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
-            <Button
-                android:id="@+id/acceptorder"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:layout_margin="10dp"
-                android:text="주문 접수"
-                android:textSize="7pt"
-                android:onClick="onClick" />
+<!--            <Button-->
+<!--                android:id="@+id/acceptorder"-->
+<!--                android:layout_width="0dp"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_weight="1"-->
+<!--                android:layout_margin="10dp"-->
+<!--                android:text="주문 접수"-->
+<!--                android:textSize="7pt"-->
+<!--                android:onClick="onClick" />-->
 
             <Button
                 android:id="@+id/call_rider"

@@ -32,8 +32,8 @@ public class OrderListView extends LinearLayout {
         text_address = (TextView) findViewById(R.id.tv_address2);
         text_price = (TextView) findViewById(R.id.tv_price);
     }
-    public void setNum(String num) {
-        text_num.setText("인원 : "+num+"명");
+    public void setProduct(String product) {
+        text_num.setText("메뉴 : "+product);
     }
     public void setPrice(String price) {
         text_price.setText("가격 : "+price+"원");
