@@ -53,6 +53,7 @@ public class MainActivity extends AppCompatActivity {
     private TextView nick;
     private String id, uid, phone, addr, nickname, storeId, strname, straddr, category, contact;
     private String length, token;
+    private StoreItem storeInfo;
 
 
     private ArrayList<AccountItem> acclist;
@@ -89,6 +90,7 @@ public class MainActivity extends AppCompatActivity {
         }
         if(intent.hasExtra("storelist")){
             strlist = (ArrayList<StoreItem>) intent.getSerializableExtra("storelist");
+            storeInfo=strlist.get(0);
             storeId = strlist.get(0).getStoreId();
             strname = strlist.get(0).getName();
             straddr = strlist.get(0).getAddress();
@@ -493,8 +495,8 @@ public class MainActivity extends AppCompatActivity {
                     Intent intent=new Intent(MainActivity.this, OrderListActivity.class);
                     intent.putExtra("list",list);
                     intent.putExtra("length",Integer.toString(jsonArray.length()));
-                    intent.putExtra("strname",strname);
-                    intent.putExtra("straddr",straddr);
+                    intent.putExtra("storeInfo",storeInfo);
+
                     startActivity(intent);
                 }else{
                     Toast.makeText(MainActivity.this, "주문내역이 존재하지 않습니다.",Toast.LENGTH_SHORT).show();

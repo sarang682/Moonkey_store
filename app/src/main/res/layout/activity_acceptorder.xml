@@ -86,44 +86,6 @@
 
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="150"
-            android:weightSum="1440">
-
-            <LinearLayout
-                android:gravity="center_vertical"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="350">
-
-                <TextView
-                    android:text="파티명(인원)"
-                    android:textSize="15dp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:orientation="vertical"
-                android:gravity="center"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1000">
-
-                <TextView
-                    android:id="@+id/name"
-                    android:background="@drawable/modify_edit"
-                    android:layout_width="wrap_content"
-                    android:layout_height="35dp"
-                    android:paddingLeft="10dp"
-                    android:textSize="15dp"
-                    android:singleLine="true"/>
-            </LinearLayout>
-
-        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"

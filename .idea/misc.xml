@@ -3,6 +3,9 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/AndroidProject/Moonkey_store/app/src/main/res/layout/activity_acceptorder.xml" value="0.16875" />
+        <entry key="..\:/AndroidProject/Moonkey_store/app/src/main/res/layout/activity_rider_type.xml" value="0.22" />
+        <entry key="..\:/AndroidProject/Moonkey_store/app/src/main/res/layout/fragment_orderlist.xml" value="0.1" />
         <entry key="..\:/AndroidProject/ui21/app/src/main/res/layout/activity_howtostanding.xml" value="0.359375" />
         <entry key="..\:/AndroidProject/ui21/app/src/main/res/layout/activity_login.xml" value="0.20742753623188406" />
         <entry key="..\:/AndroidProject/ui21/app/src/main/res/layout/activity_main.xml" value="0.20742753623188406" />

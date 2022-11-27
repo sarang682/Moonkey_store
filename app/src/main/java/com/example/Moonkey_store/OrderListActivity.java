@@ -16,8 +16,7 @@ public class OrderListActivity extends AppCompatActivity {
 
     private ListView lView;
     private OrderListActivity.ItemAdapter adapter;
-    private ArrayList<OrderItem> items = new ArrayList<OrderItem>();
-
+    private StoreItem storeInfo;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,14 +25,12 @@ public class OrderListActivity extends AppCompatActivity {
         Intent intent = getIntent();
         ArrayList<OrderItem> list = (ArrayList<OrderItem>)intent.getSerializableExtra("list");
         int length = Integer.parseInt(intent.getStringExtra("length"));
-        String strname = intent.getStringExtra("strname");
-        String straddr = intent.getStringExtra("straddr");
+        storeInfo= (StoreItem) intent.getSerializableExtra("storeInfo");
+
 
         lView=findViewById(R.id.order_lv);
-        adapter=new OrderListActivity.ItemAdapter(items);
-        for(int i =0; i<length; i++){
-            items.add(new OrderItem(list.get(i).getProduct(),list.get(i).getAddress(),list.get(i).getAmount()));
-        }
+        adapter=new OrderListActivity.ItemAdapter(list);
+//
         lView.setAdapter(adapter);
 
         lView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -41,11 +38,8 @@ public class OrderListActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 OrderItem item = (OrderItem) adapter.getItem(position);
                 Intent intent=new Intent(OrderListActivity.this, OrderDetailActivity.class);
-                intent.putExtra("address",item.getAddress());
-                intent.putExtra("amount",item.getAmount());
-
-                intent.putExtra("strname",strname);
-                intent.putExtra("straddr",straddr);
+                intent.putExtra("orderItem",item);
+                intent.putExtra("storeInfo",storeInfo);
                 startActivity(intent);
 
             }
