@@ -2,6 +2,7 @@ package com.example.Moonkey_store;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.view.menu.MenuAdapter;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.widget.NestedScrollView;
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -487,10 +488,12 @@ public class MainActivity extends AppCompatActivity {
 
                 for (int i = 0; i < jsonArray.length(); i++) {
                     JSONObject JsonObject = jsonArray.getJSONObject(i);
-                    String product = JsonObject.getString("product");
                     String address = JsonObject.getString("address");
                     int amount = JsonObject.getInt("amount");
                     String packageId = JsonObject.getString("packageId");
+                    String product = JsonObject.getString("product");
+                    product = product.substring(1, product.length() - 1).trim();
+                    product = product.replace("\"", "");
 
                     list.add(new OrderItem(packageId, product, address, amount));
                 }
