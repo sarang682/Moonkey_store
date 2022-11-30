@@ -24,6 +24,9 @@ public class OrderDetailActivity extends AppCompatActivity {
         Intent intent = getIntent();
         orderItem= (OrderItem) intent.getSerializableExtra("orderItem");
         storeInfo= (StoreItem) intent.getSerializableExtra("storeInfo");
+        String token = intent.getStringExtra("token");
+        String uid = intent.getStringExtra("uid");
+
         addr=findViewById(R.id.address);
         total=findViewById(R.id.amount);
         call=findViewById(R.id.call_rider);
@@ -43,6 +46,8 @@ public class OrderDetailActivity extends AppCompatActivity {
 //                intent.putExtra("strname",strname);
 //                intent.putExtra("straddr",straddr);
                 intent.putExtra("storeInfo",storeInfo);
+                intent.putExtra("token",token);
+                intent.putExtra("uid",uid);
                 startActivity(intent);
             }
         });

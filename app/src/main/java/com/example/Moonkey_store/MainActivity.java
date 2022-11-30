@@ -192,6 +192,8 @@ public class MainActivity extends AppCompatActivity {
                 intent.putExtra("id",id);
                 intent.putExtra("nick",nickname);
                 intent.putExtra("phone",phone);
+//                intent.putExtra("uid",uid);
+                intent.putExtra("token",token);
                 startActivity(intent);
             }
         });
@@ -488,15 +490,17 @@ public class MainActivity extends AppCompatActivity {
                     String product = JsonObject.getString("product");
                     String address = JsonObject.getString("address");
                     int amount = JsonObject.getInt("amount");
+                    String packageId = JsonObject.getString("packageId");
 
-                    list.add(new OrderItem(product, address, amount));
+                    list.add(new OrderItem(packageId, product, address, amount));
                 }
                 if(!list.isEmpty()){
                     Intent intent=new Intent(MainActivity.this, OrderListActivity.class);
                     intent.putExtra("list",list);
                     intent.putExtra("length",Integer.toString(jsonArray.length()));
                     intent.putExtra("storeInfo",storeInfo);
-
+                    intent.putExtra("token",token);
+                    intent.putExtra("uid",uid);
                     startActivity(intent);
                 }else{
                     Toast.makeText(MainActivity.this, "주문내역이 존재하지 않습니다.",Toast.LENGTH_SHORT).show();

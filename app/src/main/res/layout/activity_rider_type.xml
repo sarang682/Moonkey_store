@@ -114,13 +114,14 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1000">
 
-                <TextView
+                <EditText
                     android:id="@+id/tv_distance"
                     android:background="@drawable/modify_edit"
                     android:layout_width="wrap_content"
                     android:layout_height="35dp"
                     android:paddingLeft="10dp"
                     android:textSize="15dp"
+                    android:hint="거리를 입력하세요."
                     android:singleLine="true"/>
             </LinearLayout>
 
@@ -154,13 +155,14 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1000">
 
-                <TextView
+                <EditText
                     android:id="@+id/tv_pay"
                     android:background="@drawable/modify_edit"
                     android:layout_width="wrap_content"
                     android:layout_height="35dp"
                     android:paddingLeft="10dp"
                     android:textSize="15dp"
+                    android:hint="배달비를 입력하세요."
                     android:singleLine="true"/>
             </LinearLayout>
 
@@ -394,32 +396,32 @@
 
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="50">
+<!--        <LinearLayout-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="0dp"-->
+<!--            android:layout_weight="50">-->
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="#BDBDBD"/>
+<!--            <View-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="1dp"-->
+<!--                android:background="#BDBDBD"/>-->
 
-        </LinearLayout>
+<!--        </LinearLayout>-->
 
-        <LinearLayout
-            android:gravity="center"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="210">
+<!--        <LinearLayout-->
+<!--            android:gravity="center"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="0dp"-->
+<!--            android:layout_weight="210">-->
 
-            <Spinner
-                android:id="@+id/spinner_rider_type"
-                android:layout_width="wrap_content"
-                android:layout_height="35dp"
-                android:paddingLeft="10dp"
-                android:layout_weight="300" />
+<!--            <Spinner-->
+<!--                android:id="@+id/spinner_rider_type"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="35dp"-->
+<!--                android:paddingLeft="10dp"-->
+<!--                android:layout_weight="300" />-->
 
-        </LinearLayout>
+<!--        </LinearLayout>-->
 
         <LinearLayout
             android:gravity="center"

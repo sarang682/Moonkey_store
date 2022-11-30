@@ -26,7 +26,8 @@ public class OrderListActivity extends AppCompatActivity {
         ArrayList<OrderItem> list = (ArrayList<OrderItem>)intent.getSerializableExtra("list");
         int length = Integer.parseInt(intent.getStringExtra("length"));
         storeInfo= (StoreItem) intent.getSerializableExtra("storeInfo");
-
+        String token = intent.getStringExtra("token");
+        String uid = intent.getStringExtra("uid");
 
         lView=findViewById(R.id.order_lv);
         adapter=new OrderListActivity.ItemAdapter(list);
@@ -40,6 +41,8 @@ public class OrderListActivity extends AppCompatActivity {
                 Intent intent=new Intent(OrderListActivity.this, OrderDetailActivity.class);
                 intent.putExtra("orderItem",item);
                 intent.putExtra("storeInfo",storeInfo);
+                intent.putExtra("token",token);
+                intent.putExtra("uid",uid);
                 startActivity(intent);
 
             }

@@ -3,9 +3,6 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/AndroidProject/Moonkey_store/app/src/main/res/layout/activity_acceptorder.xml" value="0.16875" />
-        <entry key="..\:/AndroidProject/Moonkey_store/app/src/main/res/layout/activity_rider_type.xml" value="0.22" />
-        <entry key="..\:/AndroidProject/Moonkey_store/app/src/main/res/layout/fragment_orderlist.xml" value="0.1" />
         <entry key="..\:/AndroidProject/ui21/app/src/main/res/layout/activity_howtostanding.xml" value="0.359375" />
         <entry key="..\:/AndroidProject/ui21/app/src/main/res/layout/activity_login.xml" value="0.20742753623188406" />
         <entry key="..\:/AndroidProject/ui21/app/src/main/res/layout/activity_main.xml" value="0.20742753623188406" />
@@ -36,7 +33,7 @@
         <entry key="..\:/Users/sujin/AndroidStudioProjects/Moonkey_store/app/src/main/res/layout/activity_join.xml" value="0.4" />
         <entry key="..\:/Users/sujin/AndroidStudioProjects/Moonkey_store/app/src/main/res/layout/activity_login.xml" value="0.22708333333333333" />
         <entry key="..\:/Users/sujin/AndroidStudioProjects/Moonkey_store/app/src/main/res/layout/activity_main.xml" value="0.22708333333333333" />
-        <entry key="..\:/Users/sujin/AndroidStudioProjects/Moonkey_store/app/src/main/res/layout/activity_make_menu.xml" value="0.24166666666666667" />
+        <entry key="..\:/Users/sujin/AndroidStudioProjects/Moonkey_store/app/src/main/res/layout/activity_make_menu.xml" value="0.264" />
         <entry key="..\:/Users/sujin/AndroidStudioProjects/Moonkey_store/app/src/main/res/layout/activity_mypage.xml" value="0.264" />
         <entry key="..\:/Users/sujin/AndroidStudioProjects/Moonkey_store/app/src/main/res/layout/activity_personal_information.xml" value="0.24166666666666667" />
         <entry key="..\:/Users/sujin/AndroidStudioProjects/Moonkey_store/app/src/main/res/layout/activity_review.xml" value="0.264" />
@@ -48,14 +45,14 @@
         <entry key="..\:/Users/sujin/AndroidStudioProjects/Moonkey_store/app/src/main/res/layout/activity_standing_point.xml" value="0.4" />
         <entry key="..\:/Users/sujin/AndroidStudioProjects/Moonkey_store/app/src/main/res/layout/activity_store_want_rider_type.xml" value="0.24166666666666667" />
         <entry key="..\:/Users/sujin/AndroidStudioProjects/Moonkey_store/app/src/main/res/layout/activity_time.xml" value="0.24166666666666667" />
-        <entry key="..\:/Users/sujin/AndroidStudioProjects/Moonkey_store/app/src/main/res/layout/activity_unregister.xml" value="0.536" />
+        <entry key="..\:/Users/sujin/AndroidStudioProjects/Moonkey_store/app/src/main/res/layout/activity_unregister.xml" value="0.176" />
         <entry key="..\:/Users/sujin/AndroidStudioProjects/Moonkey_store/app/src/main/res/layout/activity_user_agreements.xml" value="0.24166666666666667" />
         <entry key="..\:/Users/sujin/AndroidStudioProjects/Moonkey_store/app/src/main/res/layout/fragment_account_modify.xml" value="0.264" />
         <entry key="..\:/Users/sujin/AndroidStudioProjects/Moonkey_store/app/src/main/res/layout/fragment_history.xml" value="0.24166666666666667" />
-        <entry key="..\:/Users/sujin/AndroidStudioProjects/Moonkey_store/app/src/main/res/layout/fragment_home.xml" value="0.1752136752136752" />
+        <entry key="..\:/Users/sujin/AndroidStudioProjects/Moonkey_store/app/src/main/res/layout/fragment_home.xml" value="0.264" />
         <entry key="..\:/Users/sujin/AndroidStudioProjects/Moonkey_store/app/src/main/res/layout/fragment_home2.xml" value="0.2375" />
         <entry key="..\:/Users/sujin/AndroidStudioProjects/Moonkey_store/app/src/main/res/layout/fragment_license.xml" value="0.24166666666666667" />
-        <entry key="..\:/Users/sujin/AndroidStudioProjects/Moonkey_store/app/src/main/res/layout/fragment_make_store.xml" value="0.24166666666666667" />
+        <entry key="..\:/Users/sujin/AndroidStudioProjects/Moonkey_store/app/src/main/res/layout/fragment_make_store.xml" value="0.4" />
         <entry key="..\:/Users/sujin/AndroidStudioProjects/Moonkey_store/app/src/main/res/layout/fragment_orderlist.xml" value="0.2375" />
         <entry key="..\:/Users/sujin/AndroidStudioProjects/Moonkey_store/app/src/main/res/layout/fragment_productinfo.xml" value="0.264" />
         <entry key="..\:/Users/sujin/AndroidStudioProjects/Moonkey_store/app/src/main/res/layout/fragment_question.xml" value="0.24166666666666667" />
@@ -64,6 +61,7 @@
         <entry key="..\:/Users/sujin/AndroidStudioProjects/Moonkey_store/app/src/main/res/layout/fragment_setting.xml" value="0.24166666666666667" />
         <entry key="..\:/Users/sujin/AndroidStudioProjects/Moonkey_store/app/src/main/res/layout/layout_slide_menu.xml" value="0.264" />
         <entry key="..\:/Users/sujin/AndroidStudioProjects/Moonkey_store/app/src/main/res/layout/view_menulist.xml" value="0.2375" />
+        <entry key="..\:/Users/sujin/AndroidStudioProjects/Moonkey_store/app/src/main/res/layout/view_orderlist.xml" value="0.23541666666666666" />
         <entry key="..\:/Users/sujin/AndroidStudioProjects/Moonkey_store/app/src/main/res/layout/view_reviewlist.xml" value="0.264" />
       </map>
     </option>

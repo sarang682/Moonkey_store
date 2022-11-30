@@ -8,9 +8,17 @@ public class OrderItem implements Serializable {
     private int amount;
 
     private String product;
+    private String packageId;
 
 
     public OrderItem(String product, String address, int amount) {
+        this.product = product;
+        this.address = address;
+        this.amount = amount;
+    }
+
+    public OrderItem(String packageId, String product, String address, int amount) {
+        this.packageId=packageId;
         this.product = product;
         this.address = address;
         this.amount = amount;
@@ -46,5 +54,13 @@ public class OrderItem implements Serializable {
 
     public void setAmount(int amount) {
         this.amount = amount;
+    }
+
+    public String getPackageId() {
+        return packageId;
+    }
+
+    public void setPackageId(String packageId) {
+        this.packageId = packageId;
     }
 }

@@ -17,6 +17,7 @@ public class EditAccountActivity extends AppCompatActivity {
     private EditText nickname, phonenum, current_pw, new_pw, new_pwconfirm;
     private Button modify_nickname, modify_phonenum, modify_pw, unregister;
     private TextView ID;
+    private String uid, token;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +28,8 @@ public class EditAccountActivity extends AppCompatActivity {
         String id = intent.getStringExtra("id");
         String nick = intent.getStringExtra("nick");
         String phone = intent.getStringExtra("phone");
+//        uid = intent.getStringExtra("uid");
+        token = intent.getStringExtra("token");
 
         ID=findViewById(R.id.id);
         nickname=findViewById(R.id.modify_nickname);
@@ -75,16 +78,10 @@ public class EditAccountActivity extends AppCompatActivity {
         unregister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(EditAccountActivity.this);
-                builder.setMessage("탈퇴하시겠습니까?");
-                builder.setPositiveButton("예", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        Toast.makeText(EditAccountActivity.this, "회원 탈퇴가 완료되었습니다.", Toast.LENGTH_SHORT).show();
-                    }
-                });
-                builder.setNeutralButton("아니오",null);
-                builder.create().show();
+                Intent intent = new Intent(EditAccountActivity.this, UnregisterActivity.class);
+//                intent.putExtra("uid",uid);
+                intent.putExtra("token",token);
+                startActivity(intent);
 
             }
         });
